@@ -11,6 +11,18 @@ const p = C('profile'), companies = C('companies'), metrics = C('metrics'), awar
   videos = C('videos'), proc = C('process'), speak = C('speaking'), journey = C('journey'),
   writing = C('writing'), caps = C('capabilities'), certs = C('certifications');
 
+const L = {
+  award: has(award.menu_label) ? award.menu_label : 'Award',
+  work: has(videos.menu_label) ? videos.menu_label : 'Featured work',
+  speaking: has(speak.menu_label) ? speak.menu_label : 'Speaking & workshops',
+  writing: has(writing.menu_label) ? writing.menu_label : 'Writing',
+  process: has(proc.menu_label) ? proc.menu_label : 'How I work',
+  journey: has(journey.menu_label) ? journey.menu_label : 'Journey',
+  caps: has(caps.menu_label) ? caps.menu_label : 'Capabilities',
+  toolkit: has(caps.toolkit_label) ? caps.toolkit_label : 'Toolkit',
+  certs: has(certs.menu_label) ? certs.menu_label : 'Certifications',
+  contact: has(p.contact_label) ? p.contact_label : 'Contact',
+};
 const CATS = ['AI Content', 'Talking Head', 'Directional', 'Online Content', 'Voice Over', 'Documentary'];
 
 // ---- video URL helpers ----
@@ -44,17 +56,25 @@ const ICON = {
   ],
 };
 const capIcon = (i) => `<svg aria-hidden="true" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">${ICON.caps[i % 3]}</svg>`;
-const img = (src, alt = '', cls = 'cover') => `<img class="${cls}" src="${esc(src)}" alt="${esc(alt)}" loading="lazy">`;
+const img = (src, alt = '', cls = 'cover') => `<img class="${cls}" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`;
 
 // ---- sections ----
+const phone = has(p.phone) ? p.phone.trim() : '';
+const telHref = phone ? 'tel:' + phone.replace(/[^+\d]/g, '') : '';
+const PHONE_ICON = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
 const cvHref = has(p.cv_file) ? esc(p.cv_file) : '#contact';
 const awardOn = award.show !== false;
 
-const hero = `
+const logoItems = list(companies.items).filter((c) => has(c.logo));
+const logoSet = (() => { if (!logoItems.length) return ''; let a = []; while (a.length < 10) a = a.concat(logoItems); return a.map((c) => `<img src="${esc(c.logo)}" alt="${esc(c.name || 'Company logo')}" loading="lazy">`).join(''); })();
+const logoStrip = logoItems.length ? `<div class="companies" aria-label="Companies worked with"><div class="lbl"><b>${esc(companies.label || "Where I've worked")}</b><span>${esc(companies.sublabel || `${logoItems.length}+ companies · 11 years`)}</span></div><div class="lwrap"><div class="ltrack">${logoSet}<span aria-hidden="true" style="display:contents">${logoSet}</span></div></div></div>` : '';
+const heroTpl = () => `
 <header class="top">
-  <a class="logo" href="#top">${esc(p.name)}</a>
-  <nav class="nav" aria-label="Main">
-    <a href="#work">Videos</a><a href="#speaking">Speaking</a><a href="#journey">Journey</a><a href="#writing">Writing</a><a href="#contact">Contact</a>
+  <a class="logo" href="#top">${has(p.logo) ? `<img src="${esc(p.logo)}" alt="${esc(p.name)}">` : esc(p.name)}</a>
+  <a class="head-cv" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>CV</a>
+  <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span></button>
+  <nav class="nav" id="mainnav" aria-label="Main">
+    ${headNav}
     <a class="cv" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>Download CV</a>
   </nav>
 </header>
@@ -65,13 +85,17 @@ const hero = `
     <h1>${esc(p.headline)}</h1>
     <p class="sum">${esc(p.summary)}</p>
     <div class="btns">
-      <a class="btn btn-dark" href="#work">View my work</a>
-      <a class="btn btn-line" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>Download CV</a>
+      <a class="btn btn-dark" href="${awardOn ? '#award' : '#work'}">View my work</a>
+      <a class="btn btn-line" href="#contact">${esc(L.contact)}</a>
     </div>
   </div>
-  <div class="shot ${has(p.headshot) ? '' : 'ph'}">${has(p.headshot) ? img(p.headshot, p.name) : ICON.person}</div>
+  <div class="portrait ${p.headshot_cutout === false ? 'full' : 'cutout'}">
+    <span class="dia-line" aria-hidden="true"></span>
+    <span class="dia" aria-hidden="true"></span>
+    ${has(p.headshot) ? `<img class="person" src="${esc(p.headshot)}" alt="${esc(p.name)}" onerror="this.remove()">` : `<span class="person ph-person">${ICON.person}</span>`}
+  </div>
 </section>
-${list(companies.items).length ? `<div class="companies" aria-label="Companies"><small>Worked with</small>${list(companies.items).map((c) => has(c.logo) ? `<img src="${esc(c.logo)}" alt="${esc(c.name)}" loading="lazy">` : `<span>${esc(c.name)}</span>`).join('')}</div>` : ''}`;
+${logoStrip}`;
 
 const metricsS = list(metrics.items).length ? `
 <section class="metrics bleed" aria-label="Impact"><div class="tiles">
@@ -92,7 +116,7 @@ const vItems = list(videos.items).filter((v) => has(v.title));
 const usedCats = CATS.filter((c) => vItems.some((v) => v.category === c));
 const videosS = vItems.length ? `
 <section id="work" class="videos bleed">
-  <div class="head"><p class="eyebrow">Featured work</p><h2 class="h2">${esc(videos.heading)}</h2></div>
+  <div class="head"><p class="eyebrow">${esc(L.work)}</p><h2 class="h2">${esc(videos.heading)}</h2></div>
   <div class="tabs" role="tablist">${usedCats.map((c, i) => `<button role="tab" aria-selected="${i === 0}" data-cat="${esc(c)}">${esc(c)}</button>`).join('')}</div>
   <div class="vgrid">
   ${vItems.map((v) => {
@@ -102,12 +126,13 @@ const videosS = vItems.length ? `
       <strong>${esc(v.title)}</strong><small>${esc(v.brand)}</small></button>`;
   }).join('\n')}
   </div>
+  <div class="more-wrap"><button class="more" type="button" hidden>View all</button></div>
 </section>` : '';
 
 const steps = list(proc.steps);
 const processS = steps.length ? `
 <section id="process">
-  <div class="head"><p class="eyebrow">How I work</p><h2 class="h2">${esc(proc.heading)}</h2></div>
+  <div class="head"><p class="eyebrow">${esc(L.process)}</p><h2 class="h2">${esc(proc.heading)}</h2></div>
   <div class="road"><div class="road-in" style="--n:${steps.length}">
     <div class="track" aria-hidden="true"></div>
     ${steps.map((s, i) => {
@@ -121,66 +146,121 @@ const processS = steps.length ? `
 
 const sItems = list(speak.items).filter((s) => has(s.venue));
 const speakS = sItems.length ? `
-<section id="speaking" class="speaking bleed">
-  <div class="head-row"><div class="head" style="margin:0"><p class="eyebrow">Speaking &amp; workshops</p><h2 class="h2">${esc(speak.heading)}</h2></div><p class="lead">${esc(speak.intro)}</p></div>
+<section id="speaking" class="speaking">
+  <div class="head-row"><div class="head" style="margin:0"><p class="eyebrow">${esc(L.speaking)}</p><h2 class="h2">${esc(speak.heading)}</h2></div><p class="lead">${esc(speak.intro)}</p></div>
+  <div class="tabs stabs" role="tablist">${sItems.map((s, i) => `<button role="tab" aria-selected="${i === 0}" data-venue="${i}">${esc(s.venue)}</button>`).join('')}</div>
+  ${sItems.map((s, i) => `<p class="sinfo" data-venue="${i}" ${i ? 'hidden' : ''}><span>${esc(s.topic)}</span><span class="pill">${esc(s.mode)}</span></p>`).join('')}
   <div class="sgrid">
-  ${sItems.map((s) => {
+  ${sItems.map((s, i) => {
     const photos = list(s.photos).map((x) => (typeof x === 'string' ? x : x && x.image)).filter(has);
     const media = [];
-    if (has(s.video_url)) media.push({ t: 'v', src: embed(s.video_url), url: s.video_url });
+    const vids = list(s.videos).filter((v) => v && has(v.url));
+    if (has(s.video_url) && !vids.some((v) => v.url === s.video_url)) vids.unshift({ url: s.video_url });
+    vids.forEach((v) => media.push({ t: 'v', src: embed(v.url), url: v.url, th: has(v.thumbnail) ? v.thumbnail : autoThumb(v.url) }));
     photos.forEach((ph) => media.push({ t: 'i', src: ph }));
-    const cover = photos[0] || autoThumb(s.video_url);
-    const vid = has(s.video_url);
-    return `<button class="scard" data-media="${esc(JSON.stringify(media))}" data-title="${esc(s.venue)}">
-      <span class="thumb ${vid && !cover ? 'dark' : ''}">${has(cover) ? img(cover, s.venue) : (vid ? '' : '<span class="ph" style="position:absolute;inset:0">Cover photo</span>')}
-        <span class="chips">${vid ? `<span class="v">${ICON.play.replace(/26/g, '12')}Video</span>` : ''}${photos.length ? `<span>${ICON.cam}${photos.length} photos</span>` : ''}</span>
-        ${vid ? `<span class="play">${ICON.play}</span>` : ''}</span>
-      <span class="srow"><span><strong>${esc(s.venue)}</strong><small>${esc(s.topic)}</small></span><span class="pill">${esc(s.mode)}</span></span></button>`;
+    const data = esc(JSON.stringify(media.map(({ t, src, url }) => ({ t, src, url }))));
+    if (!media.length) return `<div class="stile empty" data-venue="${i}" ${i ? 'hidden' : ''}><span class="ph" style="position:absolute;inset:0">Photos coming soon</span></div>`;
+    return media.map((m, k) => `<button class="stile ${m.t === 'v' ? 'vid' : ''}" data-venue="${i}" data-idx="${k}" data-media="${data}" data-title="${esc(s.venue)}" aria-label="${esc(s.venue)} ${m.t === 'v' ? 'video' : 'photo'} ${k + 1}" ${i ? 'hidden' : ''}>
+      ${m.t === 'v' ? `${has(m.th) ? img(m.th, s.venue) : ''}<span class="chips"><span class="v">${ICON.play.replace(/26/g, '12')}Video</span></span><span class="play">${ICON.play}</span>` : img(m.src, s.venue)}</button>`).join('');
   }).join('\n')}
   </div>
-  <p class="note">Each card opens a gallery — video first if there is one, then photos.</p>
+  <div class="more-wrap"><button class="more" type="button" hidden>View all</button></div>
+  <p class="note">Tap a photo or video to view it full screen.</p>
 </section>` : '';
 
 const journeyS = list(journey.items).length ? `
 <section id="journey" class="journey bleed"><div class="jgrid">
-  <div class="head" style="margin:0"><p class="eyebrow">Journey</p><h2 class="h2">${esc(journey.heading)}</h2><p class="lead">${esc(journey.intro)}</p></div>
-  <ol class="jlist">${list(journey.items).map((j) => `<li><time>${esc(j.years)}</time><div><strong>${esc(j.title)}</strong><span>${esc([j.company, j.result].filter(has).join(' · '))}</span></div></li>`).join('')}</ol>
+  <div class="head" style="margin:0"><p class="eyebrow">${esc(L.journey)}</p><h2 class="h2">${esc(journey.heading)}</h2><p class="lead">${esc(journey.intro)}</p></div>
+  <ol class="jlist">${list(journey.items).map((j) => {
+    const hl = list(j.highlights).map((h) => (typeof h === 'string' ? h : h && h.point)).filter(has);
+    if (!hl.length && has(j.result)) hl.push(j.result);
+    return `<li><time>${esc(j.years)}</time><div><strong>${esc(j.title)}</strong>${has(j.company) ? `<span class="jco">${esc(j.company)}</span>` : ''}${hl.length ? `<ul class="jhl">${hl.map((h) => `<li>${esc(h)}</li>`).join('')}</ul>` : ''}</div></li>`;
+  }).join('')}</ol>
 </div></section>` : '';
 
 const wItems = list(writing.items).filter((w) => has(w.title));
 const writingS = wItems.length ? `
-<section id="writing">
-  <div class="head-row"><div class="head" style="margin:0"><p class="eyebrow">Writing</p><h2 class="h2">${esc(writing.heading)}</h2></div>
+<section id="writing" class="writing bleed">
+  <div class="head-row"><div class="head" style="margin:0"><p class="eyebrow">${esc(L.writing)}</p><h2 class="h2">${esc(writing.heading)}</h2></div>
     <div class="filters"><button aria-pressed="true" data-lang="all">All</button><button aria-pressed="false" data-lang="English">English</button><button aria-pressed="false" data-lang="Bangla">বাংলা</button></div></div>
   <div class="wgrid">${wItems.map((w, i) => `<a class="wcard" data-lang="${esc(w.language)}" href="${has(w.url) ? esc(w.url) : '#writing'}" ${has(w.url) ? 'target="_blank" rel="noopener"' : ''}>
     <div class="img ${has(w.thumbnail) ? '' : 'ph'}" style="${has(w.thumbnail) ? '' : `background:${['#E0D9D3', '#EAE4DE', '#F5F2EF'][i % 3]}`}">${has(w.thumbnail) ? img(w.thumbnail, w.title) : 'Thumbnail'}</div>
     <div class="b"><small>${esc([w.publication, w.type].filter(has).join(' · '))}</small><strong>${esc(w.title)}</strong><em>Read →</em></div></a>`).join('')}</div>
+  <div class="more-wrap"><button class="more" type="button" hidden>View all</button></div>
 </section>` : '';
 
 const tools = list(caps.tools).filter((t) => has(t.name));
-const toolHtml = tools.map((t) => `<div class="tool">${has(t.logo) ? `<img src="${esc(t.logo)}" alt="" loading="lazy">` : `<b>${esc(t.name[0])}</b>`}${esc(t.name)}</div>`).join('');
+const AUTO = { semrush: 'SEO', ahrefs: 'SEO', yoast: 'SEO', 'google search console': 'SEO', illustrator: 'Design', photoshop: 'Design', canva: 'Design', figma: 'Design', mailchimp: 'Marketing', hubspot: 'Marketing', 'meta business suite': 'Marketing', 'google analytics': 'Analytics', wordpress: 'Content & CMS', chatgpt: 'AI', claude: 'AI', midjourney: 'AI', gemini: 'AI' };
+const groups = [];
+tools.forEach((t) => {
+  const cat = has(t.category) ? t.category : (AUTO[t.name.trim().toLowerCase()] || 'Other');
+  let g = groups.find((x) => x.cat === cat);
+  if (!g) groups.push((g = { cat, items: [] }));
+  g.items.push(t);
+});
+const toolHtml = groups.map((g) => `<div class="tgroup"><h4>${esc(g.cat)}</h4><div class="tlist">${g.items.map((t) => `<span class="tool">${has(t.logo) ? `<img src="${esc(t.logo)}" alt="" loading="lazy" onerror="this.remove()">` : ''}${esc(t.name)}</span>`).join('')}</div></div>`).join('');
 const capsS = `
-<section class="caps bleed" aria-label="Capabilities">
-  <div class="head"><p class="eyebrow">Capabilities</p><h2 class="h2">${esc(caps.heading)}</h2></div>
+<section id="capabilities" class="caps bleed" aria-label="Capabilities">
+  <div class="head"><p class="eyebrow">${esc(L.caps)}</p><h2 class="h2">${esc(caps.heading)}</h2></div>
   <div class="cgrid">${list(caps.cards).map((c, i) => `<div class="ccard"><span class="num" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span><i>${capIcon(i)}</i><div><h3>${esc(c.title)}</h3><p>${esc(c.description)}</p></div><div class="skills">${list(c.skills).map((s) => `<span>${esc(typeof s === 'string' ? s : s.skill)}</span>`).join('')}</div></div>`).join('')}</div>
-  ${tools.length ? `<div class="toolkit"><h3>Toolkit</h3><div class="marquee"><div class="mtrack">${toolHtml}<span aria-hidden="true" style="display:contents">${toolHtml}</span></div></div></div>` : ''}
+  ${tools.length ? `<div class="toolkit" id="toolkit"><h3>${esc(L.toolkit)} ${has(caps.toolkit_subtitle) ? `<small>${esc(caps.toolkit_subtitle)}</small>` : (caps.toolkit_subtitle === '' ? '' : '<small>Tools I use every day</small>')}</h3><div class="tgrid">${toolHtml}</div></div>` : ''}
 </section>`;
 
 const certsS = list(certs.items).length ? `
-<section aria-label="Certifications" style="padding:4rem 0 1rem"><div class="cert-wrap">
-  <div class="head-row"><div class="head" style="margin:0"><p class="eyebrow">Certifications</p><h2 class="h2">${esc(certs.heading)}</h2></div>${has(certs.badge) ? `<span class="cert-badge">${esc(certs.badge)}</span>` : ''}</div>
+<section id="certifications" aria-label="Certifications" style="padding:4rem 0 1rem"><div class="cert-wrap">
+  <div class="head-row"><div class="head" style="margin:0"><p class="eyebrow">${esc(L.certs)}</p><h2 class="h2">${esc(certs.heading)}</h2></div>${has(certs.badge) ? `<span class="cert-badge">${esc(certs.badge)}</span>` : ''}</div>
   <div class="cgrid2">${list(certs.items).map((c) => `<div class="cert"><div>${has(c.logo) ? `<img class="logo" src="${esc(c.logo)}" alt="">` : `<i>${ICON.medal}</i>`}<small>${esc(c.issuer)}</small><strong>${esc(c.title)}</strong>${has(c.url) ? `<a href="${esc(c.url)}" target="_blank" rel="noopener">View credential →</a>` : ''}</div></div>`).join('')}</div>
 </div></section>` : '';
 
 const contactS = `
 <section id="contact" class="contact">
-  ${has(p.open_to) ? `<p class="eyebrow">${esc(p.open_to)}</p>` : ''}
   <h2>${esc(p.contact_heading)}</h2>
-  ${has(p.email) ? `<a class="mail" href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ''}
-  <div class="btns"><a class="btn btn-w" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>Download CV (PDF)</a>${has(p.linkedin) ? `<a class="btn btn-o" href="${esc(p.linkedin)}" target="_blank" rel="noopener">LinkedIn</a>` : ''}</div>
+  <div class="cdetails">${has(p.email) ? `<a class="mail" href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ''}${phone ? `<a class="mail" href="${telHref}">${esc(phone)}</a>` : ''}</div>
+  <div class="btns"><a class="btn btn-w" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>Download CV (PDF)</a>${phone ? `<a class="btn btn-o btn-ico call" href="${telHref}" aria-label="Call ${esc(p.name)} at ${esc(phone)}">${PHONE_ICON}Contact</a>` : ''}</div>
 </section>
-<footer><span>© ${new Date().getFullYear()} ${esc(p.name)}</span><span>${esc(p.location)}</span></footer>`;
+`;
+const fcol = (title, links) => { const l = links.filter((n) => n[2]); return l.length ? `<nav class="fcol" aria-label="${esc(title)}"><h3>${esc(title)}</h3>${l.map((n) => `<a href="${n[0]}">${esc(n[1])}</a>`).join('')}</nav>` : ''; };
+const workLabel = has(p.work_menu_label) ? p.work_menu_label : 'My work';
+const workLinks = [['#work', L.work, vItems.length], ['#speaking', L.speaking, sItems.length], ['#writing', L.writing, wItems.length]];
+const foot = fs.existsSync(path.join(__dirname, 'content', 'footer.json')) ? C('footer') : {};
+const socials = list(foot.socials).filter((s) => has(s.label) && has(s.url));
+const waNum = (has(p.whatsapp) ? p.whatsapp : phone).replace(/[^\d]/g, '');
+const SI = {
+  in: '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>',
+  wa: '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3z"/></svg>',
+  mail: '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+};
+const fsocialLinks = [
+  has(p.linkedin) ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener" aria-label="LinkedIn">${SI.in}</a>` : '',
+  waNum ? `<a href="https://wa.me/${waNum}" target="_blank" rel="noopener" aria-label="WhatsApp">${SI.wa}</a>` : '',
+  has(p.email) ? `<a href="mailto:${esc(p.email)}" aria-label="Email">${SI.mail}</a>` : '',
+].join('');
+const fsocial = fsocialLinks ? `<div class="fsocial">${fsocialLinks}</div>` : '';
+const footerS = `
+<footer class="foot bleed">
+  <div class="fgrid">
+    <div class="fbrand">
+      <a class="flogo" href="#top">${has(p.logo_light) ? `<img src="${esc(p.logo_light)}" alt="${esc(p.name)}">` : esc(p.name)}</a>
+      ${has(foot.tagline) ? `<p>${esc(foot.tagline)}</p>` : ''}
+      ${fsocial}
+    </div>
+    ${fcol(workLabel, workLinks)}
+    ${fcol('Explore', [['#journey', L.journey, list(journey.items).length], ['#process', L.process, steps.length], ['#contact', L.contact, 1]])}
+    ${fcol('More', [['#award', L.award, awardOn ? 1 : 0], ['#capabilities', L.caps, list(caps.cards).length], ['#toolkit', L.toolkit, tools.length], ['#certifications', L.certs, list(certs.items).length]])}
+    <div><h3>Connect</h3>
+      ${has(p.email) ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ''}
+      ${socials.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join('')}
+      <a class="fcv" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>Download CV</a>
+      ${phone ? `<a class="fphone" href="${telHref}">${PHONE_ICON}${esc(phone)}</a>` : ''}
+    </div>
+  </div>
+  <div class="fbar"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span>${foot.show_back_to_top !== false ? '<a href="#top">Back to top ↑</a>' : ''}</div>
+</footer>`;
 
+const workLinksH = workLinks.filter((n) => n[2]);
+const ddIcon = '<svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg>';
+const headNav = (workLinksH.length ? `<div class="dd"><button class="dd-btn" type="button" aria-expanded="false" aria-haspopup="true">${esc(workLabel)}${ddIcon}</button><div class="dd-menu">${workLinksH.map((n) => `<a href="${n[0]}">${esc(n[1])}</a>`).join('')}</div></div>` : '')
+  + [['#journey', L.journey, list(journey.items).length], ['#process', L.process, steps.length], ['#certifications', L.certs, list(certs.items).length], ['#contact', L.contact, 1]].filter((n) => n[2]).map((n) => `<a href="${n[0]}">${esc(n[1])}</a>`).join('');
 const html = `<!doctype html>
 <html lang="en">
 <head>
@@ -191,23 +271,25 @@ const html = `<!doctype html>
 <meta property="og:title" content="${esc(p.name)} — ${esc(p.label)}">
 <meta property="og:description" content="${esc(p.seo_description)}">
 ${has(p.headshot) ? `<meta property="og:image" content="${esc(p.headshot)}">` : ''}
+${has(p.favicon) ? `<link rel="icon" href="${esc(p.favicon)}">` : ''}
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap">
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
 <div class="wrap">
-${hero}
+${heroTpl()}
 ${metricsS}
 ${awardS}
 ${videosS}
-${processS}
 ${speakS}
-${journeyS}
 ${writingS}
+${processS}
+${journeyS}
 ${capsS}
 ${certsS}
 ${contactS}
+${footerS}
 </div>
 <div class="modal" role="dialog" aria-modal="true" aria-label="Media viewer"><div class="mbox">
   <button class="mclose" aria-label="Close">×</button><button class="mprev" aria-label="Previous">‹</button><button class="mnext" aria-label="Next">›</button>

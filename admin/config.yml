@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: jarinworks-co/jarinworks   # <-- change to your GitHub username/repo
+  repo: jarinworks-co/jarinworks
   branch: main
 
 site_url: https://jarinworks.com
@@ -18,29 +18,39 @@ collections:
         file: content/profile.json
         fields:
           - { label: Name, name: name, widget: string }
+          - { label: "Header logo (optional — replaces name; transparent PNG/SVG, shown 40px tall)", name: logo, widget: image, required: false }
+          - { label: "Footer logo (optional — light version for the dark footer)", name: logo_light, widget: image, required: false }
+          - { label: "Favicon (browser tab icon — square PNG, 512×512)", name: favicon, widget: image, required: false }
           - { label: Label above headline, name: label, widget: string }
           - { label: Headline, name: headline, widget: string }
           - { label: Summary, name: summary, widget: text }
-          - { label: Headshot (4:5 portrait), name: headshot, widget: image, required: false }
+          - { label: "Headshot — best as a cut-out PNG with transparent background, at least 1000px tall", name: headshot, widget: image, required: false }
+          - { label: "Headshot is a cut-out (transparent background)", name: headshot_cutout, widget: boolean, default: true, required: false }
           - { label: CV (PDF), name: cv_file, widget: file, required: false }
           - { label: Award badge in hero (leave empty to hide), name: award_badge, widget: string, required: false }
           - { label: Email, name: email, widget: string, required: false }
+          - { label: "Phone (shown on hero button, contact & footer — e.g. +880 1772-950568)", name: phone, widget: string, required: false }
+          - { label: "WhatsApp number (optional — leave empty to use the phone number)", name: whatsapp, widget: string, required: false }
           - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
           - { label: Location, name: location, widget: string, required: false }
           - { label: Open-to-roles line, name: open_to, widget: string, required: false }
+          - { label: "Header dropdown name (groups Featured work, Speaking, Writing)", name: work_menu_label, widget: string, default: "My work", required: false }
+          - { label: "Contact section name (header/footer menus)", name: contact_label, widget: string, default: "Contact", required: false }
           - { label: Contact heading, name: contact_heading, widget: string }
           - { label: Google description (SEO), name: seo_description, widget: text }
 
-      - label: "2. Worked with (companies)"
+      - label: "2. Worked with (logos)"
         name: companies
         file: content/companies.json
         fields:
+          - { label: Label, name: label, widget: string, default: "Where I've worked", required: false }
+          - { label: Sub-label (leave empty for auto count), name: sublabel, widget: string, required: false }
           - label: Companies
             name: items
             widget: list
             fields:
-              - { label: Name, name: name, widget: string }
-              - { label: Logo (optional), name: logo, widget: image, required: false }
+              - { label: "Logo — transparent PNG/SVG, wide (about 300×80px). Shown 40px tall", name: logo, widget: image }
+              - { label: Company name (not shown — for screen readers & Google), name: name, widget: string, required: false }
 
       - label: "3. Metric tiles"
         name: metrics
@@ -57,6 +67,7 @@ collections:
         name: award
         file: content/award.json
         fields:
+          - { label: "Section name (shown above the heading + in header/footer menus)", name: menu_label, widget: string, default: "Award", required: false }
           - { label: Show award section, name: show, widget: boolean, default: true }
           - { label: Award label, name: label, widget: string }
           - { label: Category line, name: category, widget: string }
@@ -68,6 +79,7 @@ collections:
         name: videos
         file: content/videos.json
         fields:
+          - { label: "Section name (shown above the heading + in header/footer menus)", name: menu_label, widget: string, default: "Featured work", required: false }
           - { label: Heading, name: heading, widget: string }
           - label: Videos
             name: items
@@ -84,6 +96,7 @@ collections:
         name: process
         file: content/process.json
         fields:
+          - { label: "Section name (shown above the heading + in header/footer menus)", name: menu_label, widget: string, default: "How I work", required: false }
           - { label: Heading, name: heading, widget: string }
           - label: Steps
             name: steps
@@ -97,6 +110,7 @@ collections:
         name: speaking
         file: content/speaking.json
         fields:
+          - { label: "Section name (shown above the heading + in header/footer menus)", name: menu_label, widget: string, default: "Speaking & workshops", required: false }
           - { label: Heading, name: heading, widget: string }
           - { label: Intro, name: intro, widget: text }
           - label: Workshops
@@ -107,7 +121,14 @@ collections:
               - { label: Venue, name: venue, widget: string }
               - { label: Topic · Year, name: topic, widget: string }
               - { label: Format, name: mode, widget: select, options: ["Offline", "Online"] }
-              - { label: Video URL (optional), name: video_url, widget: string, required: false }
+              - label: Videos (shown first)
+                name: videos
+                widget: list
+                required: false
+                summary: "{{fields.url}}"
+                fields:
+                  - { label: Video URL (YouTube, Facebook, Drive, Vimeo), name: url, widget: string }
+                  - { label: Thumbnail (optional — YouTube auto-fills), name: thumbnail, widget: image, required: false }
               - label: Photos (first = cover)
                 name: photos
                 widget: list
@@ -119,6 +140,7 @@ collections:
         name: journey
         file: content/journey.json
         fields:
+          - { label: "Section name (shown above the heading + in header/footer menus)", name: menu_label, widget: string, default: "Journey", required: false }
           - { label: Heading, name: heading, widget: string }
           - { label: Intro, name: intro, widget: text }
           - label: Roles (newest first)
@@ -129,12 +151,18 @@ collections:
               - { label: Years, name: years, widget: string }
               - { label: Title, name: title, widget: string }
               - { label: Company, name: company, widget: string }
-              - { label: Result line, name: result, widget: string, required: false }
+              - label: Highlights (bullet points, up to 4)
+                name: highlights
+                widget: list
+                required: false
+                max: 4
+                field: { label: Point, name: point, widget: string }
 
       - label: "9. Writing"
         name: writing
         file: content/writing.json
         fields:
+          - { label: "Section name (shown above the heading + in header/footer menus)", name: menu_label, widget: string, default: "Writing", required: false }
           - { label: Heading, name: heading, widget: string }
           - label: Articles
             name: items
@@ -152,6 +180,9 @@ collections:
         name: capabilities
         file: content/capabilities.json
         fields:
+          - { label: "Section name (shown above the heading + in header/footer menus)", name: menu_label, widget: string, default: "Capabilities", required: false }
+          - { label: Toolkit title, name: toolkit_label, widget: string, default: "Toolkit", required: false }
+          - { label: Toolkit subtitle, name: toolkit_subtitle, widget: string, default: "Tools I use every day", required: false }
           - { label: Heading, name: heading, widget: string }
           - label: Cards
             name: cards
@@ -160,17 +191,20 @@ collections:
               - { label: Title, name: title, widget: string }
               - { label: Description, name: description, widget: string }
               - { label: Skills, name: skills, widget: list, field: { label: Skill, name: skill, widget: string } }
-          - label: Toolkit (auto-scrolling)
+          - label: Toolkit (grouped by category)
             name: tools
             widget: list
+            summary: "{{fields.category}} — {{fields.name}}"
             fields:
               - { label: Tool name, name: name, widget: string }
-              - { label: Logo (square), name: logo, widget: image, required: false }
+              - { label: "Category (leave empty = auto for common tools)", name: category, widget: select, required: false, options: ["SEO", "Design", "Marketing", "Analytics", "Content & CMS", "AI", "Video", "Other"] }
+              - { label: Logo (small square icon, optional), name: logo, widget: image, required: false }
 
       - label: "11. Certifications"
         name: certifications
         file: content/certifications.json
         fields:
+          - { label: "Section name (shown above the heading + in header/footer menus)", name: menu_label, widget: string, default: "Certifications", required: false }
           - { label: Heading, name: heading, widget: string }
           - { label: Count badge, name: badge, widget: string, required: false }
           - label: Certificates
@@ -181,3 +215,16 @@ collections:
               - { label: Issuer, name: issuer, widget: string }
               - { label: Credential link, name: url, widget: string, required: false }
               - { label: Issuer logo (optional), name: logo, widget: image, required: false }
+
+      - label: "12. Footer"
+        name: footer
+        file: content/footer.json
+        fields:
+          - { label: Tagline, name: tagline, widget: string, required: false }
+          - label: Social links (empty URL = hidden)
+            name: socials
+            widget: list
+            fields:
+              - { label: Label (e.g. LinkedIn), name: label, widget: string }
+              - { label: URL, name: url, widget: string, required: false }
+          - { label: Show "Back to top" link, name: show_back_to_top, widget: boolean, default: true }
