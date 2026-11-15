@@ -1,0 +1,47 @@
+{
+  "heading": "On camera, on brand.",
+  "items": [
+    {
+      "category": "AI Content",
+      "title": "[Video title]",
+      "brand": "[Brand]",
+      "url": "",
+      "thumbnail": ""
+    },
+    {
+      "category": "Talking Head",
+      "title": "[Video title]",
+      "brand": "[Brand]",
+      "url": "",
+      "thumbnail": ""
+    },
+    {
+      "category": "Directional",
+      "title": "[Video title]",
+      "brand": "[Brand]",
+      "url": "",
+      "thumbnail": ""
+    },
+    {
+      "category": "Online Content",
+      "title": "[Video title]",
+      "brand": "[Brand]",
+      "url": "",
+      "thumbnail": ""
+    },
+    {
+      "category": "Voice Over",
+      "title": "[Video title]",
+      "brand": "[Brand]",
+      "url": "",
+      "thumbnail": ""
+    },
+    {
+      "category": "Documentary",
+      "title": "[Video title]",
+      "brand": "[Brand]",
+      "url": "",
+      "thumbnail": ""
+    }
+  ]
+}

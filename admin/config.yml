@@ -1,0 +1,183 @@
+backend:
+  name: github
+  repo: jarinworks-co/jarinworks   # <-- change to your GitHub username/repo
+  branch: main
+
+site_url: https://jarinworks.com
+display_url: https://jarinworks.com
+media_folder: images/uploads
+public_folder: /images/uploads
+
+collections:
+  - name: site
+    label: Website content
+    editor: { preview: false }
+    files:
+      - label: "1. Profile, hero & contact"
+        name: profile
+        file: content/profile.json
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Label above headline, name: label, widget: string }
+          - { label: Headline, name: headline, widget: string }
+          - { label: Summary, name: summary, widget: text }
+          - { label: Headshot (4:5 portrait), name: headshot, widget: image, required: false }
+          - { label: CV (PDF), name: cv_file, widget: file, required: false }
+          - { label: Award badge in hero (leave empty to hide), name: award_badge, widget: string, required: false }
+          - { label: Email, name: email, widget: string, required: false }
+          - { label: LinkedIn URL, name: linkedin, widget: string, required: false }
+          - { label: Location, name: location, widget: string, required: false }
+          - { label: Open-to-roles line, name: open_to, widget: string, required: false }
+          - { label: Contact heading, name: contact_heading, widget: string }
+          - { label: Google description (SEO), name: seo_description, widget: text }
+
+      - label: "2. Worked with (companies)"
+        name: companies
+        file: content/companies.json
+        fields:
+          - label: Companies
+            name: items
+            widget: list
+            fields:
+              - { label: Name, name: name, widget: string }
+              - { label: Logo (optional), name: logo, widget: image, required: false }
+
+      - label: "3. Metric tiles"
+        name: metrics
+        file: content/metrics.json
+        fields:
+          - label: Tiles
+            name: items
+            widget: list
+            fields:
+              - { label: Number, name: value, widget: string }
+              - { label: Label, name: label, widget: string }
+
+      - label: "4. Award"
+        name: award
+        file: content/award.json
+        fields:
+          - { label: Show award section, name: show, widget: boolean, default: true }
+          - { label: Award label, name: label, widget: string }
+          - { label: Category line, name: category, widget: string }
+          - { label: Campaign title (Bangla), name: title_bn, widget: string }
+          - { label: English line, name: title_en, widget: string, required: false }
+          - { label: Photo, name: photo, widget: image, required: false }
+
+      - label: "5. Videos"
+        name: videos
+        file: content/videos.json
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - label: Videos
+            name: items
+            widget: list
+            summary: "{{fields.category}} — {{fields.title}}"
+            fields:
+              - { label: Category, name: category, widget: select, options: ["AI Content", "Talking Head", "Directional", "Online Content", "Voice Over", "Documentary"] }
+              - { label: Title, name: title, widget: string }
+              - { label: Brand / client, name: brand, widget: string, required: false }
+              - { label: Video URL (YouTube, Facebook, Drive, Vimeo), name: url, widget: string, required: false }
+              - { label: Custom thumbnail (optional — YouTube auto-fills), name: thumbnail, widget: image, required: false }
+
+      - label: "6. How I work"
+        name: process
+        file: content/process.json
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - label: Steps
+            name: steps
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: string }
+              - { label: Deliverable tag, name: deliverable, widget: string, required: false }
+
+      - label: "7. Speaking & workshops"
+        name: speaking
+        file: content/speaking.json
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - { label: Intro, name: intro, widget: text }
+          - label: Workshops
+            name: items
+            widget: list
+            summary: "{{fields.venue}}"
+            fields:
+              - { label: Venue, name: venue, widget: string }
+              - { label: Topic · Year, name: topic, widget: string }
+              - { label: Format, name: mode, widget: select, options: ["Offline", "Online"] }
+              - { label: Video URL (optional), name: video_url, widget: string, required: false }
+              - label: Photos (first = cover)
+                name: photos
+                widget: list
+                required: false
+                fields:
+                  - { label: Photo, name: image, widget: image }
+
+      - label: "8. Journey"
+        name: journey
+        file: content/journey.json
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - { label: Intro, name: intro, widget: text }
+          - label: Roles (newest first)
+            name: items
+            widget: list
+            summary: "{{fields.years}} — {{fields.title}}"
+            fields:
+              - { label: Years, name: years, widget: string }
+              - { label: Title, name: title, widget: string }
+              - { label: Company, name: company, widget: string }
+              - { label: Result line, name: result, widget: string, required: false }
+
+      - label: "9. Writing"
+        name: writing
+        file: content/writing.json
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - label: Articles
+            name: items
+            widget: list
+            summary: "{{fields.title}}"
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Publication, name: publication, widget: string, required: false }
+              - { label: Type (Blog, Web copy…), name: type, widget: string, required: false }
+              - { label: Language, name: language, widget: select, options: ["English", "Bangla"] }
+              - { label: Link, name: url, widget: string, required: false }
+              - { label: Thumbnail, name: thumbnail, widget: image, required: false }
+
+      - label: "10. Capabilities & toolkit"
+        name: capabilities
+        file: content/capabilities.json
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - label: Cards
+            name: cards
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Description, name: description, widget: string }
+              - { label: Skills, name: skills, widget: list, field: { label: Skill, name: skill, widget: string } }
+          - label: Toolkit (auto-scrolling)
+            name: tools
+            widget: list
+            fields:
+              - { label: Tool name, name: name, widget: string }
+              - { label: Logo (square), name: logo, widget: image, required: false }
+
+      - label: "11. Certifications"
+        name: certifications
+        file: content/certifications.json
+        fields:
+          - { label: Heading, name: heading, widget: string }
+          - { label: Count badge, name: badge, widget: string, required: false }
+          - label: Certificates
+            name: items
+            widget: list
+            fields:
+              - { label: Title, name: title, widget: string }
+              - { label: Issuer, name: issuer, widget: string }
+              - { label: Credential link, name: url, widget: string, required: false }
+              - { label: Issuer logo (optional), name: logo, widget: image, required: false }

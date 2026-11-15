@@ -1,0 +1,42 @@
+{
+  "heading": "Always learning.",
+  "badge": "10+ certifications",
+  "items": [
+    {
+      "title": "Google Analytics",
+      "issuer": "Google",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "Digital Marketing Fundamentals",
+      "issuer": "Google Digital Garage",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "Content Marketing, SEO & Email",
+      "issuer": "HubSpot",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "Content Marketing & SEO Keywords",
+      "issuer": "LinkedIn Learning",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "Certified Digital Marketer",
+      "issuer": "NSD",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "Social Media Marketing",
+      "issuer": "Bright Skills",
+      "url": "",
+      "logo": ""
+    }
+  ]
+}

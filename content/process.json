@@ -1,0 +1,30 @@
+{
+  "heading": "From brief to brand impact.",
+  "steps": [
+    {
+      "title": "Discover",
+      "description": "Brief, audience & brand audit",
+      "deliverable": "Research brief"
+    },
+    {
+      "title": "Strategize",
+      "description": "Message, positioning, channels, KPIs",
+      "deliverable": "Campaign plan"
+    },
+    {
+      "title": "Create",
+      "description": "Content, design, on-camera, AI-assisted",
+      "deliverable": "Content calendar"
+    },
+    {
+      "title": "Launch",
+      "description": "Cross-team alignment, go live",
+      "deliverable": "Launch checklist"
+    },
+    {
+      "title": "Measure",
+      "description": "Track, report, refine",
+      "deliverable": "Performance report"
+    }
+  ]
+}

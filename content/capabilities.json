@@ -1,0 +1,77 @@
+{
+  "heading": "What I bring to a brand.",
+  "cards": [
+    {
+      "title": "Strategy",
+      "description": "Where the brand should stand — and why.",
+      "skills": [
+        "Brand positioning",
+        "Campaign planning",
+        "Communication planning",
+        "Content strategy"
+      ]
+    },
+    {
+      "title": "Creative",
+      "description": "Words, stories and presence that land.",
+      "skills": [
+        "Bilingual copywriting",
+        "Storytelling",
+        "On-camera presenting",
+        "Email marketing"
+      ]
+    },
+    {
+      "title": "Leadership",
+      "description": "Teams aligned, work shipped.",
+      "skills": [
+        "Content team lead",
+        "Design team direction",
+        "Cross-team alignment",
+        "Workshops & training"
+      ]
+    }
+  ],
+  "tools": [
+    {
+      "name": "Semrush",
+      "logo": ""
+    },
+    {
+      "name": "Ahrefs",
+      "logo": ""
+    },
+    {
+      "name": "Yoast",
+      "logo": ""
+    },
+    {
+      "name": "WordPress",
+      "logo": ""
+    },
+    {
+      "name": "Mailchimp",
+      "logo": ""
+    },
+    {
+      "name": "Illustrator",
+      "logo": ""
+    },
+    {
+      "name": "Photoshop",
+      "logo": ""
+    },
+    {
+      "name": "Canva",
+      "logo": ""
+    },
+    {
+      "name": "ChatGPT",
+      "logo": ""
+    },
+    {
+      "name": "Google Analytics",
+      "logo": ""
+    }
+  ]
+}

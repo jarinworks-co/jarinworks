@@ -1,0 +1,29 @@
+{
+  "heading": "Selected writing — English & বাংলা",
+  "items": [
+    {
+      "title": "[Article title]",
+      "publication": "[Publication]",
+      "type": "Blog",
+      "language": "English",
+      "url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "[Article title]",
+      "publication": "[Publication]",
+      "type": "Web copy",
+      "language": "English",
+      "url": "",
+      "thumbnail": ""
+    },
+    {
+      "title": "[Article title]",
+      "publication": "[Publication]",
+      "type": "Article",
+      "language": "Bangla",
+      "url": "",
+      "thumbnail": ""
+    }
+  ]
+}

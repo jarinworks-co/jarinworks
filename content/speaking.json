@@ -1,0 +1,27 @@
+{
+  "heading": "On stage and online.",
+  "intro": "Workshops and sessions on content, branding and digital marketing — for universities, media and professionals.",
+  "items": [
+    {
+      "venue": "University of Dhaka",
+      "topic": "[Topic · Year]",
+      "mode": "Offline",
+      "video_url": "",
+      "photos": []
+    },
+    {
+      "venue": "The Daily Star",
+      "topic": "[Topic · Year]",
+      "mode": "Offline",
+      "video_url": "",
+      "photos": []
+    },
+    {
+      "venue": "Southeast University",
+      "topic": "[Topic · Year]",
+      "mode": "Offline",
+      "video_url": "",
+      "photos": []
+    }
+  ]
+}
