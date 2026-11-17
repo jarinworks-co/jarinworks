@@ -1,19 +1,26 @@
 {
   "items": [
     {
-      "name": "AKIJ iBOS"
+      "name": "AKIJ iBOS",
+      "logo": "/images/uploads/akij-resource.png"
     },
     {
-      "name": "SubscriptionPro"
+      "name": "SubscriptionPro",
+      "logo": "/images/uploads/1.png"
     },
     {
-      "name": "Creative IT Institute"
+      "name": "Creative IT Institute",
+      "logo": "/images/uploads/akij-resource.png"
     },
     {
-      "name": "NetCoden"
+      "name": "NetCoden",
+      "logo": "/images/uploads/1.png"
     },
     {
-      "name": "weDevs"
+      "name": "weDevs",
+      "logo": "/images/uploads/akij-resource.png"
     }
-  ]
+  ],
+  "label": "Brands I have worked with",
+  "sublabel": "100+ Brands. 11+ Years of experience."
 }
