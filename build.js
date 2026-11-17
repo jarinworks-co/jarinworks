@@ -160,9 +160,8 @@ const processS = steps.length ? `
 const sItems = list(speak.items).filter((s) => has(s.venue));
 const speakS = sItems.length ? `
 <section id="speaking" class="speaking">
-  <div class="head-row"><div class="head" style="margin:0"><p class="eyebrow">${esc(L.speaking)}</p><h2 class="h2">${esc(speak.heading)}</h2></div><p class="lead">${esc(speak.intro)}</p></div>
+  <div class="head fit"><p class="eyebrow">${esc(L.speaking)}</p><h2 class="h2">${esc(speak.heading)}</h2>${has(speak.intro) ? `<p class="lead">${esc(speak.intro)}</p>` : ''}</div>
   <div class="tabs stabs" role="tablist">${sItems.map((s, i) => `<button role="tab" aria-selected="${i === 0}" data-venue="${i}">${esc(s.venue)}</button>`).join('')}</div>
-  ${sItems.map((s, i) => `<p class="sinfo" data-venue="${i}" ${i ? 'hidden' : ''}><span>${esc(s.topic)}</span><span class="pill">${esc(s.mode)}</span></p>`).join('')}
   <div class="sgrid">
   ${sItems.map((s, i) => {
     const photos = list(s.photos).map((x) => (typeof x === 'string' ? x : x && x.image)).filter(has);

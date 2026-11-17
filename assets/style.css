@@ -327,3 +327,5 @@ section{padding:5rem 0}
 @media(max-width:480px){.contact .btns .btn{width:100%}.contact .btns .btn.call.shown svg{display:inline}.contact .btns .btn.call.shown{font-size:.95rem}}
 .contact{align-items:center;text-align:center}.contact h2{margin:0 auto}.contact .btns{justify-content:center}
 .contact h2{max-width:none}@media(min-width:761px){.contact h2{white-space:nowrap;font-size:clamp(2rem,4.2vw,3.6rem)}}
+/* intro as wide as the heading, wraps beyond it */
+.head.fit{width:fit-content;max-width:100%}.head.fit .lead{width:0;min-width:100%;max-width:none}

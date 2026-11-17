@@ -127,8 +127,6 @@ collections:
             summary: "{{fields.venue}}"
             fields:
               - { label: Venue, name: venue, widget: string }
-              - { label: Topic · Year, name: topic, widget: string }
-              - { label: Format, name: mode, widget: select, options: ["Offline", "Online"] }
               - label: Videos (shown first)
                 name: videos
                 widget: list
