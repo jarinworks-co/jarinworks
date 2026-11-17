@@ -72,6 +72,10 @@
     {
       "name": "Google Analytics",
       "logo": ""
+    },
+    {
+      "name": "Screaming Frog",
+      "category": "SEO"
     }
   ]
 }
