@@ -1,6 +1,6 @@
 {
   "heading": "From writer to brand lead.",
-  "intro": "A look at the brands I've worked with, the roles I've taken on, and the impact I've made along the way.",
+  "intro": "The organizations I've worked with, the roles I've embraced, and the impact I've made along the way.",
   "items": [
     {
       "years": "January 2025 - Present",
@@ -11,38 +11,69 @@
         "Plan & execute brand campaigns across all platforms.",
         "Lead the content team to create contents meeting client's requirements.",
         "Supervise design dpt. to deliver visuals, maintaining brand identity.",
-        "Work with marketing, sales, product, & HR teams to align branding"
+        "Work with marketing, sales, product, & HR teams to align branding."
       ]
     },
     {
-      "years": "2024 — 2025",
+      "years": "October 2024 - January 2025",
       "title": "Content Manager",
       "company": "SubscriptionPro",
-      "result": "Content for SaaS product adoption"
+      "result": "Content for SaaS product adoption",
+      "highlights": [
+        "Create and manage content for SaaS product marketing campaigns.",
+        "Optimize content to drive user engagement and product adoption."
+      ]
     },
     {
-      "years": "2022 — 2024",
+      "years": "October 2022 - October 2024",
       "title": "Senior Content Writer",
       "company": "Creative IT Institute",
-      "result": "Led content team · brand-awareness workshops"
+      "result": "Led content team · brand-awareness workshops",
+      "highlights": [
+        "Lead content team and providing lessons to the students.",
+        "Conduct Workshop & Seminar to increase Brand Awareness.",
+        "Develop Content Marketing and E-mail Marketing campaigns.",
+        "Research industry topics & best SEO practice to boost website traffic."
+      ]
     },
     {
-      "years": "2020 — 2022",
+      "years": "November 2020 - September 2022",
       "title": "Content Writer",
       "company": "NetCoden Ltd",
-      "result": "SEO content · social media"
+      "result": "SEO content · social media",
+      "highlights": [
+        "Develop SEO optimized articles, blogs, web content, & social media.",
+        "Manage Social media channel & creating graphic content."
+      ]
     },
     {
-      "years": "2017 — 2020",
+      "years": "August 2017 - November 2020",
       "title": "English Teacher & Trainer",
       "company": "Uttar Kafrul High School",
-      "result": "Communication & training"
+      "result": "Communication & training",
+      "highlights": [
+        "Plan and prepare appropriately the assigned courses and lectures.",
+        "Record & report timely the results of assignments & exams."
+      ]
     },
     {
-      "years": "2014 — 2016",
+      "years": "July 2016 - July 2016",
       "title": "Content Writer",
+      "company": "Multimedia content & communication Ltd",
+      "result": "",
+      "highlights": [
+        "Write, edit & translation English and Bangla creative content- articles, blogs.",
+        "Develop content and train agents for 999 emergency service."
+      ]
+    },
+    {
       "company": "weDevs · Multimedia Content & Communication Ltd",
-      "result": ""
+      "title": "Content Writer",
+      "years": "November 2014 - March 2016",
+      "highlights": [
+        "Develop & edit content for blogs, articles, product descriptions.",
+        "- Edit and polish existing content to improve readability."
+      ]
     }
   ]
 }
