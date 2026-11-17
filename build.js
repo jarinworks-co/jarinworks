@@ -150,11 +150,11 @@ const processS = steps.length ? `
   <div class="road"><div class="road-in" style="--n:${steps.length}">
     <div class="track" aria-hidden="true"></div>
     ${steps.map((s, i) => {
-      const col = `grid-column:${i + 1}`;
+      const col = `grid-column:${i + 1};--i:${i + 1}`;
       return `<div class="step ${i % 2 ? 'down' : 'up'}" style="${col}"><strong>${esc(s.title)}</strong><span>${esc(s.description)}</span>${has(s.deliverable) ? `<span class="pill">${esc(s.deliverable)}</span>` : ''}</div>
       <div class="node ${i % 2 ? 'alt' : ''}" style="${col}"><b>${String(i + 1).padStart(2, '0')}</b></div>`;
     }).join('')}
-    <div class="end" style="grid-column:${steps.length + 1}"><span>Impact →</span></div>
+    <div class="end" style="grid-column:${steps.length + 1};--i:${steps.length + 1}"><span>Impact →</span></div>
   </div></div>
 </section>` : '';
 
