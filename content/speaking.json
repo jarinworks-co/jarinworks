@@ -1,5 +1,5 @@
 {
-  "heading": "On stage and online.",
+  "heading": "On Stage Speaking & Public Presentations",
   "intro": "Workshops and sessions on content, branding and digital marketing — for universities, media and professionals.",
   "items": [
     {
@@ -22,6 +22,21 @@
       "mode": "Offline",
       "video_url": "",
       "photos": []
+    },
+    {
+      "venue": "Bangladesh Home Economics College",
+      "mode": "Offline",
+      "topic": "2024"
+    },
+    {
+      "venue": "Lalmatia Govt. Mohila College",
+      "mode": "Offline",
+      "topic": "2023"
+    },
+    {
+      "venue": "International Standard University",
+      "topic": "2024",
+      "mode": "Offline"
     }
   ]
 }
