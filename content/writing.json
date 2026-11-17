@@ -10,20 +10,85 @@
       "thumbnail": "/images/uploads/ibos.jpg"
     },
     {
-      "title": "[Article title]",
-      "publication": "[Publication]",
-      "type": "Web copy",
+      "title": "Creative IT Institute",
+      "publication": "",
+      "type": "",
       "language": "English",
-      "url": "",
+      "url": "https://www.creativeitinstitute.com/",
       "thumbnail": ""
     },
     {
-      "title": "[Article title]",
+      "title": "Track Force",
       "publication": "[Publication]",
       "type": "Article",
-      "language": "Bangla",
-      "url": "",
+      "language": "English",
+      "url": "https://trackforce.io/",
       "thumbnail": ""
+    },
+    {
+      "url": "https://travilo.io/",
+      "title": "Travilo",
+      "language": "English"
+    },
+    {
+      "language": "Bangla",
+      "url": "https://illusionarc.com/",
+      "title": "Illusion Arc"
+    },
+    {
+      "title": "Farias Agro",
+      "url": "https://fariasagro.com/",
+      "language": "Bangla"
+    },
+    {
+      "title": "999 National Help Desk",
+      "url": "https://www.999.gov.bd/home",
+      "language": "Bangla"
+    },
+    {
+      "url": "https://www.creativeclippingpath.com/",
+      "title": "Creative Clipping Path",
+      "language": "English"
+    },
+    {
+      "title": "We Devs",
+      "language": "English",
+      "url": "https://wedevs.com/"
+    },
+    {
+      "url": "https://netcoden.com/",
+      "title": "NetCoden",
+      "language": "English"
+    },
+    {
+      "url": "https://aeroapps.io/",
+      "title": "Aero Apps",
+      "language": "English"
+    },
+    {
+      "url": "https://aerodrop.ai/",
+      "title": "Aero Drop",
+      "language": "English"
+    },
+    {
+      "title": "Studio iBOS",
+      "url": "https://studio.ibos.io/",
+      "language": "English"
+    },
+    {
+      "language": "English",
+      "url": "https://seasky.com.bd/",
+      "title": "Sea Sky"
+    },
+    {
+      "url": "https://brainforward.com.bd/",
+      "language": "Bangla",
+      "title": "Brain Forward"
+    },
+    {
+      "url": "https://subscriptionpro.co/",
+      "title": "Subscription Pro",
+      "language": "English"
     }
   ]
 }
