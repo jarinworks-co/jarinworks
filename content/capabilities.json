@@ -76,6 +76,22 @@
     {
       "name": "Screaming Frog",
       "category": "SEO"
+    },
+    {
+      "name": "Grok",
+      "category": "AI"
+    },
+    {
+      "name": "Canva",
+      "category": "Design"
+    },
+    {
+      "name": "Claude",
+      "category": "AI"
+    },
+    {
+      "name": "Higgsfield ai",
+      "category": "Video"
     }
   ]
 }
