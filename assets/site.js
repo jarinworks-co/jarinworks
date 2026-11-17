@@ -10,15 +10,43 @@
     t.scrollIntoView({ behavior: 'smooth', block: 'start' });
     if (history.replaceState && location.protocol.startsWith('http')) history.replaceState(null, '', '#' + id);
   });
-  // "Call me": dial on phones, scroll to contact details on desktop
+  // Contact button: 1st tap reveals the number in the button; 2nd tap dials (phone) or copies (desktop)
   const canDial = window.matchMedia('(pointer: coarse)').matches;
+  const reveal = (a) => { a.classList.add('shown'); const s = a.querySelector('span'); if (s) s.textContent = a.dataset.num; a.setAttribute('aria-label', a.dataset.num); };
   document.querySelectorAll('a.call').forEach((a) => a.addEventListener('click', (e) => {
+    if (!a.classList.contains('shown')) { e.preventDefault(); reveal(a); return; }
     if (canDial) return;
     e.preventDefault();
-    const c = document.getElementById('contact');
-    if (c) c.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    const d = document.querySelector('.cdetails a[href^="tel:"]');
-    if (d) { d.classList.add('flash'); setTimeout(() => d.classList.remove('flash'), 1600); }
+    const s = a.querySelector('span');
+    const done = () => { s.textContent = 'Copied ✓'; setTimeout(() => { s.textContent = a.dataset.num; }, 1400); };
+    if (navigator.clipboard) navigator.clipboard.writeText(a.dataset.num).then(done, () => {}); 
+  }));
+  // Email links: on computers open Gmail compose in a new tab (mailto often does nothing without a mail app)
+  const gmail = (to) => window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to), '_blank', 'noopener');
+  // Email button: 1st tap reveals the address; 2nd tap opens Gmail (computer) or the mail app (phone)
+  document.querySelectorAll('a.mrev').forEach((a) => a.addEventListener('click', (e) => {
+    if (!a.classList.contains('shown')) { e.preventDefault(); reveal(a); return; }
+    if (canDial) return;
+    e.preventDefault(); gmail(a.dataset.num);
+  }));
+  if (!canDial) document.querySelectorAll('a[href^="mailto:"]:not(.mrev)').forEach((a) => a.addEventListener('click', (e) => {
+    e.preventDefault();
+    const to = a.getAttribute('href').slice(7).split('?')[0];
+    window.open('https://mail.google.com/mail/?view=cm&fs=1&to=' + encodeURIComponent(to), '_blank', 'noopener');
+  }));
+  // Side rail: show after the hero scrolls away, hide near the footer
+  const rail = document.querySelector('.srail');
+  if (rail) { const hero = document.querySelector('.hero'); const foot = document.querySelector('footer');
+    const upd = () => { const past = hero ? hero.getBoundingClientRect().bottom < 80 : true; const nearFoot = foot ? foot.getBoundingClientRect().top < innerHeight : false; rail.classList.toggle('on', past && !nearFoot); };
+    addEventListener('scroll', upd, { passive: true }); upd(); }
+  // Footer call icon: dial on phones; on desktop scroll to Contact and reveal the number
+  document.querySelectorAll('a.fcall').forEach((a) => a.addEventListener('click', (e) => {
+    if (canDial) return;
+    e.preventDefault();
+    const b = document.querySelector('#contact a.call') || document.querySelector('a.call');
+    if (!b) return;
+    b.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    reveal(b); b.classList.add('flash'); setTimeout(() => b.classList.remove('flash'), 1600);
   }));
 
   // Desktop dropdown

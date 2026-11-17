@@ -39,6 +39,12 @@ collections:
           - { label: "Header dropdown name (groups Featured work, Speaking, Writing)", name: work_menu_label, widget: string, default: "My work", required: false }
           - { label: "Contact section name (header/footer menus)", name: contact_label, widget: string, default: "Contact", required: false }
           - { label: Contact heading, name: contact_heading, widget: string }
+          - { label: "Button text — hero 'View my work'", name: btn_work, widget: string, default: "View my work", required: false }
+          - { label: "Button text — Contact (hero + contact section; shows the number when pressed)", name: btn_contact, widget: string, default: "Contact", required: false }
+          - { label: "Button text — Email (contact section; shows the address when pressed)", name: btn_email, widget: string, default: "Email", required: false }
+          - { label: "Button text — CV in contact section", name: btn_cv, widget: string, default: "Download CV (PDF)", required: false }
+          - { label: "Button text — CV in header (on mobile the short 'CV' button is used)", name: btn_header_cv, widget: string, default: "Download CV", required: false }
+          - { label: "Label before hero social icons", name: find_label, widget: string, default: "Find me on", required: false }
           - { label: Google description (SEO), name: seo_description, widget: text }
 
       - label: "2. Worked with (logos)"

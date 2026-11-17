@@ -59,9 +59,17 @@ const capIcon = (i) => `<svg aria-hidden="true" width="26" height="26" viewBox="
 const img = (src, alt = '', cls = 'cover') => `<img class="${cls}" src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="this.remove()">`;
 
 // ---- sections ----
-const phone = has(p.phone) ? p.phone.trim() : '';
+const foot = fs.existsSync(path.join(__dirname, 'content', 'footer.json')) ? C('footer') : {};
+// normalise footer social URLs (plain email -> mailto, plain number -> tel)
+const normUrl = (u) => { u = String(u || '').trim(); if (!u) return ''; if (/^(mailto:|tel:|https?:)/i.test(u)) return u; if (/^[^\s@]+@[^\s@]+$/.test(u)) return 'mailto:' + u; if (/^[+\d][\d\s()-]{5,}$/.test(u)) return 'tel:' + u.replace(/[^+\d]/g, ''); if (/^(www\.|[a-z0-9-]+\.[a-z]{2,})/i.test(u)) return 'https://' + u; return u; };
+const socials = list(foot.socials).map((s) => ({ label: s.label || '', url: normUrl(s.url) })).filter((s) => s.url);
+const sTel = socials.find((s) => /^tel:/i.test(s.url));
+const phone = has(p.phone) ? p.phone.trim() : (sTel ? sTel.url.slice(4) : '');
+const phonePretty = (() => { const d = phone.replace(/[^\d+]/g, ''); const m = d.match(/^(?:\+?880|0)(1\d{3})(\d{6})$/); return m ? `+880 ${m[1]}-${m[2]}` : phone; })();
 const telHref = phone ? 'tel:' + phone.replace(/[^+\d]/g, '') : '';
 const PHONE_ICON = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
+const SI_MAIL = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>';
+const BT = { work: has(p.btn_work) ? p.btn_work : 'View my work', contact: has(p.btn_contact) ? p.btn_contact : 'Contact', email: has(p.btn_email) ? p.btn_email : 'Email', cv: has(p.btn_cv) ? p.btn_cv : 'Download CV (PDF)', headcv: has(p.btn_header_cv) ? p.btn_header_cv : 'Download CV', find: has(p.find_label) ? p.find_label : 'Find me on' };
 const cvHref = has(p.cv_file) ? esc(p.cv_file) : '#contact';
 const awardOn = award.show !== false;
 
@@ -75,7 +83,7 @@ const heroTpl = () => `
   <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span></button>
   <nav class="nav" id="mainnav" aria-label="Main">
     ${headNav}
-    <a class="cv" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>Download CV</a>
+    <a class="cv" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>${esc(BT.headcv)}</a>
   </nav>
 </header>
 <section id="top" class="hero">
@@ -85,9 +93,10 @@ const heroTpl = () => `
     <h1>${esc(p.headline)}</h1>
     <p class="sum">${esc(p.summary)}</p>
     <div class="btns">
-      <a class="btn btn-dark" href="${awardOn ? '#award' : '#work'}">View my work</a>
-      <a class="btn btn-line" href="#contact">${esc(L.contact)}</a>
+      <a class="btn btn-dark" href="${awardOn ? '#award' : '#work'}">${esc(BT.work)}</a>
+      ${phone ? `<a class="btn btn-line btn-ico call" href="${telHref}" data-num="${esc(phonePretty)}" aria-label="Show ${esc(p.name)}'s phone number">${PHONE_ICON}<span>${esc(BT.contact)}</span></a>` : `<a class="btn btn-line" href="#contact">${esc(L.contact)}</a>`}
     </div>
+    ${heroSoc}
   </div>
   <div class="portrait ${p.headshot_cutout === false ? 'full' : 'cutout'}">
     <span class="dia-line" aria-hidden="true"></span>
@@ -219,27 +228,42 @@ const certsS = list(certs.items).length ? `
 const contactS = `
 <section id="contact" class="contact">
   <h2>${esc(p.contact_heading)}</h2>
-  <div class="cdetails">${has(p.email) ? `<a class="mail" href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ''}${phone ? `<a class="mail" href="${telHref}">${esc(phone)}</a>` : ''}</div>
-  <div class="btns"><a class="btn btn-w" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>Download CV (PDF)</a>${phone ? `<a class="btn btn-o btn-ico call" href="${telHref}" aria-label="Call ${esc(p.name)} at ${esc(phone)}">${PHONE_ICON}Contact</a>` : ''}</div>
+  <div class="btns"><a class="btn btn-w" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>${esc(BT.cv)}</a>${has(p.email) ? `<a class="btn btn-o btn-ico mrev" href="mailto:${esc(p.email.trim())}" data-num="${esc(p.email.trim())}" aria-label="Show ${esc(p.name)}'s email">${SI_MAIL}<span>${esc(BT.email)}</span></a>` : ''}${phone ? `<a class="btn btn-o btn-ico call" href="${telHref}" data-num="${esc(phonePretty)}" aria-label="Show ${esc(p.name)}'s phone number">${PHONE_ICON}<span>Contact</span></a>` : ''}</div>
 </section>
 `;
 const fcol = (title, links) => { const l = links.filter((n) => n[2]); return l.length ? `<nav class="fcol" aria-label="${esc(title)}"><h3>${esc(title)}</h3>${l.map((n) => `<a href="${n[0]}">${esc(n[1])}</a>`).join('')}</nav>` : ''; };
 const workLabel = has(p.work_menu_label) ? p.work_menu_label : 'My work';
 const workLinks = [['#work', L.work, vItems.length], ['#speaking', L.speaking, sItems.length], ['#writing', L.writing, wItems.length]];
-const foot = fs.existsSync(path.join(__dirname, 'content', 'footer.json')) ? C('footer') : {};
-const socials = list(foot.socials).filter((s) => has(s.label) && has(s.url));
-const waNum = (has(p.whatsapp) ? p.whatsapp : phone).replace(/[^\d]/g, '');
+const waNum = (() => { let n = (has(p.whatsapp) ? p.whatsapp : phone).replace(/[^\d]/g, ''); if (/^0\d{10}$/.test(n)) n = '880' + n.slice(1); return n; })(); // BD local 01… -> 880…
+const SV = (d, fill) => `<svg aria-hidden="true" width="19" height="19" viewBox="0 0 24 24" ${fill ? 'fill="currentColor"' : 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"'}>${d}</svg>`;
 const SI = {
-  in: '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/></svg>',
-  wa: '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3z"/></svg>',
-  mail: '<svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+  linkedin: SV('<path d="M4.98 3.5a2.5 2.5 0 11-.01 5 2.5 2.5 0 01.01-5zM3 9h4v12H3zM9 9h3.8v1.7h.1c.5-1 1.8-2 3.8-2 4 0 4.8 2.6 4.8 6V21h-4v-5.6c0-1.3 0-3-1.9-3s-2.1 1.4-2.1 2.9V21H9z"/>', 1),
+  whatsapp: SV('<path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zm0 18.2a8.2 8.2 0 01-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1112 20.2zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 01-3.3-2.9c-.2-.4.2-.4.7-1.3.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 00-.7.3 3 3 0 00-.9 2.2 5.2 5.2 0 001.1 2.7 11.8 11.8 0 004.5 4c1.7.7 2.3.8 3.2.6.5-.1 1.5-.6 1.7-1.2s.2-1.1.2-1.2-.2-.2-.5-.3z"/>', 1),
+  email: SV('<rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/>'),
+  phone: SV('<path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/>'),
+  facebook: SV('<path d="M14 8h3V4h-3c-2.8 0-4.5 1.8-4.5 4.6V11H7v4h2.5v7h4v-7H16l.5-4h-3V9c0-.6.4-1 1-1z"/>', 1),
+  youtube: SV('<path d="M22 8.2a3 3 0 00-2.1-2.1C18 5.6 12 5.6 12 5.6s-6 0-7.9.5A3 3 0 002 8.2 31 31 0 001.6 12 31 31 0 002 15.8a3 3 0 002.1 2.1c1.9.5 7.9.5 7.9.5s6 0 7.9-.5a3 3 0 002.1-2.1 31 31 0 00.4-3.8 31 31 0 00-.4-3.8zM10 15V9l5.2 3z"/>', 1),
+  instagram: SV('<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".6" fill="currentColor"/>'),
+  x: SV('<path d="M17.8 3h3.3l-7.2 8.2L22.4 21h-6.6l-5.2-6.8L4.7 21H1.4l7.7-8.8L1 3h6.8l4.7 6.2zm-1.2 16h1.8L7.5 4.9H5.5z"/>', 1),
+  link: SV('<path d="M10 13a5 5 0 007.5.5l3-3a5 5 0 00-7-7l-1.7 1.7"/><path d="M14 11a5 5 0 00-7.5-.5l-3 3a5 5 0 007 7l1.7-1.7"/>'),
 };
-const fsocialLinks = [
-  has(p.linkedin) ? `<a href="${esc(p.linkedin)}" target="_blank" rel="noopener" aria-label="LinkedIn">${SI.in}</a>` : '',
-  waNum ? `<a href="https://wa.me/${waNum}" target="_blank" rel="noopener" aria-label="WhatsApp">${SI.wa}</a>` : '',
-  has(p.email) ? `<a href="mailto:${esc(p.email)}" aria-label="Email">${SI.mail}</a>` : '',
-].join('');
-const fsocial = fsocialLinks ? `<div class="fsocial">${fsocialLinks}</div>` : '';
+const kind = (u) => /^mailto:/i.test(u) ? 'email' : /^tel:/i.test(u) ? 'phone' : /linkedin\./i.test(u) ? 'linkedin' : /(wa\.me|whatsapp\.)/i.test(u) ? 'whatsapp' : /(facebook\.|fb\.)/i.test(u) ? 'facebook' : /(youtube\.|youtu\.be)/i.test(u) ? 'youtube' : /instagram\./i.test(u) ? 'instagram' : /(twitter\.|x\.com)/i.test(u) ? 'x' : 'link';
+// one icon per type: profile fields first, then footer socials
+const iconLinks = [];
+const iconData = {};
+const seen = new Set();
+const addIcon = (url, label) => { if (!url) return; const k = kind(url); if (k !== 'link' && seen.has(k)) return; seen.add(k); if (!iconData[k]) iconData[k] = { url, label }; const ext = /^https?:/i.test(url); iconLinks.push(`<a ${k === 'phone' ? 'class="fcall" ' : ''}href="${esc(url)}"${ext ? ' target="_blank" rel="noopener"' : ''} aria-label="${esc(label || k)}" title="${esc(label || k)}">${SI[k]}</a>`); };
+if (has(p.linkedin)) addIcon(normUrl(p.linkedin), 'LinkedIn');
+socials.filter((s) => kind(s.url) === 'linkedin').forEach((s) => addIcon(s.url, s.label));
+if (waNum) addIcon('https://wa.me/' + waNum, 'WhatsApp');
+if (has(p.email)) addIcon('mailto:' + p.email.trim(), 'Email');
+if (phone) addIcon(telHref, 'Call');
+socials.forEach((s) => addIcon(s.url, s.label));
+const HERO_NAMES = { linkedin: 'LinkedIn', email: 'Email', whatsapp: 'WhatsApp' };
+const heroIcons = ['linkedin', 'email', 'whatsapp'].filter((k) => iconData[k]).map((k) => { const u = iconData[k].url; const ext = /^https?:/i.test(u); return `<a href="${esc(u)}"${ext ? ' target="_blank" rel="noopener"' : ''} aria-label="${HERO_NAMES[k]}" title="${HERO_NAMES[k]}">${SI[k]}</a>`; }).join('');
+const heroSoc = heroIcons ? `<div class="hsoc"><span>${esc(BT.find)}</span>${heroIcons}</div>` : '';
+const rail = heroIcons ? `<aside class="srail" aria-label="Social links">${heroIcons}<i aria-hidden="true"></i></aside>` : '';
+const fsocial = iconLinks.length ? `<div class="fsocial">${iconLinks.join('')}</div>` : '';
 const footerS = `
 <footer class="foot bleed">
   <div class="fgrid">
@@ -251,12 +275,6 @@ const footerS = `
     ${fcol(workLabel, workLinks)}
     ${fcol('Explore', [['#journey', L.journey, list(journey.items).length], ['#process', L.process, steps.length], ['#contact', L.contact, 1]])}
     ${fcol('More', [['#award', L.award, awardOn ? 1 : 0], ['#capabilities', L.caps, list(caps.cards).length], ['#toolkit', L.toolkit, tools.length], ['#certifications', L.certs, list(certs.items).length]])}
-    <div><h3>Connect</h3>
-      ${has(p.email) ? `<a href="mailto:${esc(p.email)}">${esc(p.email)}</a>` : ''}
-      ${socials.map((s) => `<a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.label)} ↗</a>`).join('')}
-      <a class="fcv" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>Download CV</a>
-      ${phone ? `<a class="fphone" href="${telHref}">${PHONE_ICON}${esc(phone)}</a>` : ''}
-    </div>
   </div>
   <div class="fbar"><span>© ${new Date().getFullYear()} ${esc(p.name)}</span>${foot.show_back_to_top !== false ? '<a href="#top">Back to top ↑</a>' : ''}</div>
 </footer>`;
@@ -281,6 +299,7 @@ ${has(p.favicon) ? `<link rel="icon" href="${esc(p.favicon)}">` : ''}
 <link rel="stylesheet" href="/assets/style.css">
 </head>
 <body>
+${rail}
 <div class="wrap">
 ${heroTpl()}
 ${metricsS}
