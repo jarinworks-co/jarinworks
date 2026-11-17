@@ -92,6 +92,33 @@
     {
       "name": "Higgsfield ai",
       "category": "Video"
+    },
+    {
+      "name": "seedance",
+      "category": "Video"
+    },
+    {
+      "name": "Wix"
+    },
+    {
+      "name": "Adobe Photoshop",
+      "category": "Design"
+    },
+    {
+      "name": "Adobe Illustrator",
+      "category": "Design"
+    },
+    {
+      "name": "Figma",
+      "category": "Design"
+    },
+    {
+      "name": "klaviyo",
+      "category": "Marketing"
+    },
+    {
+      "name": "Perplexity",
+      "category": "AI"
     }
   ]
 }
