@@ -3,32 +3,32 @@
   "badge": "10+ certifications",
   "items": [
     {
-      "title": "Google Analytics",
-      "issuer": "Google",
-      "url": "",
-      "logo": ""
-    },
-    {
-      "title": "Digital Marketing Fundamentals",
-      "issuer": "Google Digital Garage",
-      "url": "",
-      "logo": ""
-    },
-    {
-      "title": "Content Marketing, SEO & Email",
-      "issuer": "HubSpot",
-      "url": "",
-      "logo": ""
-    },
-    {
-      "title": "Content Marketing & SEO Keywords",
-      "issuer": "LinkedIn Learning",
-      "url": "",
-      "logo": ""
-    },
-    {
-      "title": "Certified Digital Marketer",
+      "title": "NSD certified digital marketer.",
       "issuer": "NSD",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "Digital Marketing",
+      "issuer": "MLab",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "Content Marketing",
+      "issuer": "Hubspot",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "SEO by Hubspot",
+      "issuer": "Hubspot",
+      "url": "",
+      "logo": ""
+    },
+    {
+      "title": "Google Analytics for Beginners",
+      "issuer": "Google",
       "url": "",
       "logo": ""
     },
@@ -37,6 +37,14 @@
       "issuer": "Bright Skills",
       "url": "",
       "logo": ""
+    },
+    {
+      "title": "Email marketing",
+      "issuer": "Hubspot"
+    },
+    {
+      "title": "Advanced content marketing",
+      "issuer": "Linkedin"
     }
   ]
 }
