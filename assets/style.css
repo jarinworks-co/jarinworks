@@ -81,8 +81,7 @@ section{padding:5rem 0}
 @media(max-width:560px){.companies{flex-direction:column;align-items:stretch;gap:1rem}.lbl{border-right:0;border-left:2px solid var(--brand);padding:0 0 0 .9rem}}
 .ltrack{--g:2rem;display:flex;align-items:center;gap:4rem;width:max-content;animation:logoscroll 40s linear infinite}
 .lwrap:hover .ltrack{animation-play-state:paused}
-.ltrack img{height:40px;width:auto;max-width:170px;object-fit:contain;filter:grayscale(1);opacity:.7;transition:filter .2s,opacity .2s}
-.ltrack img:hover{filter:none;opacity:1}
+.ltrack img{height:40px;width:auto;max-width:170px;object-fit:contain}
 @media(prefers-reduced-motion:reduce){.ltrack{animation:none}}
 
 /* metrics */

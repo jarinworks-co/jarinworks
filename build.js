@@ -67,7 +67,7 @@ const awardOn = award.show !== false;
 
 const logoItems = list(companies.items).filter((c) => has(c.logo));
 const logoSet = (() => { if (!logoItems.length) return ''; let a = []; while (a.length < 10) a = a.concat(logoItems); return a.map((c) => `<img src="${esc(c.logo)}" alt="${esc(c.name || 'Company logo')}" loading="lazy">`).join(''); })();
-const logoStrip = logoItems.length ? `<div class="companies" aria-label="Companies worked with"><div class="lbl"><b>${esc(companies.label || "Where I've worked")}</b><span>${esc(companies.sublabel || `${logoItems.length}+ companies · 11 years`)}</span></div><div class="lwrap"><div class="ltrack">${logoSet}<span aria-hidden="true" style="display:contents">${logoSet}</span></div></div></div>` : '';
+const logoStrip = logoItems.length ? `<div class="companies" aria-label="Companies worked with"><div class="lbl"><b>${esc(companies.label || "Where I've worked")}</b>${has(companies.sublabel) ? `<span>${esc(companies.sublabel)}</span>` : ''}</div><div class="lwrap"><div class="ltrack">${logoSet}<span aria-hidden="true" style="display:contents">${logoSet}</span></div></div></div>` : '';
 const heroTpl = () => `
 <header class="top">
   <a class="logo" href="#top">${has(p.logo) ? `<img src="${esc(p.logo)}" alt="${esc(p.name)}">` : esc(p.name)}</a>

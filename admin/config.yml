@@ -44,7 +44,7 @@ collections:
         file: content/companies.json
         fields:
           - { label: Label, name: label, widget: string, default: "Where I've worked", required: false }
-          - { label: Sub-label (leave empty for auto count), name: sublabel, widget: string, required: false }
+          - { label: Sub-label (optional — leave empty to hide), name: sublabel, widget: string, required: false }
           - label: Companies
             name: items
             widget: list
