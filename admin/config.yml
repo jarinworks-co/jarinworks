@@ -92,12 +92,13 @@ collections:
           - label: Videos
             name: items
             widget: list
-            summary: "{{fields.category}} — {{fields.title}}"
+            summary: "{{fields.category}} — {{fields.title}} {{fields.url}}"
             fields:
               - { label: Category, name: category, widget: select, options: ["AI Content", "Talking Head", "Directional", "Online Content", "Voice Over", "Documentary"] }
-              - { label: Title, name: title, widget: string }
-              - { label: Brand / client, name: brand, widget: string, required: false }
+              - { label: Title (optional), name: title, widget: string, required: false }
+              - { label: Brand / client (optional), name: brand, widget: string, required: false }
               - { label: Video URL (YouTube, Facebook, Drive, Vimeo), name: url, widget: string, required: false }
+              - { label: "Player size when playing (thumbnail stays 16:9)", name: ratio, widget: select, options: ["16:9 (landscape)", "1:1 (square)", "9:16 (vertical / Reels)"], default: "16:9 (landscape)", required: false }
               - { label: "Custom thumbnail — 1280×720px (16:9) JPG, under 300 KB (optional — YouTube auto-fills)", name: thumbnail, widget: image, required: false }
 
       - label: "6. How I work"
@@ -134,6 +135,7 @@ collections:
                 summary: "{{fields.url}}"
                 fields:
                   - { label: Video URL (YouTube, Facebook, Drive, Vimeo), name: url, widget: string }
+                  - { label: "Player size when playing (thumbnail stays 16:9)", name: ratio, widget: select, options: ["16:9 (landscape)", "1:1 (square)", "9:16 (vertical / Reels)"], default: "16:9 (landscape)", required: false }
                   - { label: "Thumbnail — 1280×720px (16:9) JPG, under 300 KB (optional — YouTube auto-fills)", name: thumbnail, widget: image, required: false }
               - label: Photos (first = cover)
                 name: photos

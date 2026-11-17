@@ -125,7 +125,8 @@ const awardS = awardOn ? `
   <div class="award-photo"><div class="frame">${has(award.photo) ? `<div>${img(award.photo, award.label)}</div>` : '<div class="ph">Award photo</div>'}</div></div>
 </div></section>` : '';
 
-const vItems = list(videos.items).filter((v) => has(v.title));
+const RATIO = (r) => ({ '1:1': '1/1', '9:16': '9/16' }[String(r || '').split(' ')[0]] || '16/9');
+const vItems = list(videos.items).filter((v) => has(v.url) || has(v.title) || has(v.thumbnail));
 const usedCats = CATS.filter((c) => vItems.some((v) => v.category === c));
 const videosS = vItems.length ? `
 <section id="work" class="videos bleed">
@@ -134,9 +135,9 @@ const videosS = vItems.length ? `
   <div class="vgrid">
   ${vItems.map((v) => {
     const th = has(v.thumbnail) ? v.thumbnail : autoThumb(v.url);
-    return `<button class="vcard" data-cat="${esc(v.category)}" data-embed="${esc(embed(v.url))}" data-url="${esc(v.url)}" data-title="${esc(v.title)}" ${v.category === usedCats[0] ? '' : 'hidden'}>
+    return `<button class="vcard" data-cat="${esc(v.category)}" data-embed="${esc(embed(v.url))}" data-url="${esc(v.url)}" data-ratio="${RATIO(v.ratio)}" data-title="${esc(has(v.title) ? v.title : v.category || '')}" ${v.category === usedCats[0] ? '' : 'hidden'}>
       <span class="thumb">${has(th) ? img(th, v.title) : ''}<span class="pill">${esc(v.category)}</span><span class="play">${ICON.play}</span></span>
-      <strong>${esc(v.title)}</strong><small>${esc(v.brand)}</small></button>`;
+      ${has(v.title) ? `<strong>${esc(v.title)}</strong>` : ''}${has(v.brand) ? `<small>${esc(v.brand)}</small>` : ''}</button>`;
   }).join('\n')}
   </div>
   <div class="more-wrap"><button class="more" type="button" hidden>View all</button></div>
@@ -168,9 +169,9 @@ const speakS = sItems.length ? `
     const media = [];
     const vids = list(s.videos).filter((v) => v && has(v.url));
     if (has(s.video_url) && !vids.some((v) => v.url === s.video_url)) vids.unshift({ url: s.video_url });
-    vids.forEach((v) => media.push({ t: 'v', src: embed(v.url), url: v.url, th: has(v.thumbnail) ? v.thumbnail : autoThumb(v.url) }));
+    vids.forEach((v) => media.push({ t: 'v', src: embed(v.url), url: v.url, r: RATIO(v.ratio), th: has(v.thumbnail) ? v.thumbnail : autoThumb(v.url) }));
     photos.forEach((ph) => media.push({ t: 'i', src: ph }));
-    const data = esc(JSON.stringify(media.map(({ t, src, url }) => ({ t, src, url }))));
+    const data = esc(JSON.stringify(media.map(({ t, src, url, r }) => ({ t, src, url, r }))));
     if (!media.length) return `<div class="stile empty" data-venue="${i}" ${i ? 'hidden' : ''}><span class="ph" style="position:absolute;inset:0">Photos coming soon</span></div>`;
     return media.map((m, k) => `<button class="stile ${m.t === 'v' ? 'vid' : ''}" data-venue="${i}" data-idx="${k}" data-media="${data}" data-title="${esc(s.venue)}" aria-label="${esc(s.venue)} ${m.t === 'v' ? 'video' : 'photo'} ${k + 1}" ${i ? 'hidden' : ''}>
       ${m.t === 'v' ? `${has(m.th) ? img(m.th, s.venue) : ''}<span class="chips"><span class="v">${ICON.play.replace(/26/g, '12')}Video</span></span><span class="play">${ICON.play}</span>` : img(m.src, s.venue)}</button>`).join('');

@@ -139,6 +139,10 @@
   function render() {
     const m = items[idx];
     stage.innerHTML = '';
+    const r = (m.t === 'v' && m.r) ? m.r : '16/9';
+    const [rw, rh] = r.split('/').map(Number);
+    stage.style.aspectRatio = r;
+    modal.querySelector('.mbox').style.width = `min(1000px, 100%, calc((100vh - 170px) * ${rw / rh}))`;
     if (m.t === 'v') {
       const f = document.createElement('iframe');
       f.src = m.src; f.allow = 'autoplay; encrypted-media; fullscreen; picture-in-picture'; f.allowFullscreen = true; f.title = title;
@@ -167,7 +171,7 @@
   });
 
   document.querySelectorAll('.vcard').forEach((c) => c.addEventListener('click', () => {
-    if (c.dataset.embed) open([{ t: 'v', src: c.dataset.embed }], c.dataset.title);
+    if (c.dataset.embed) open([{ t: 'v', src: c.dataset.embed, r: c.dataset.ratio }], c.dataset.title);
     else if (c.dataset.url) window.open(c.dataset.url, '_blank', 'noopener');
   }));
   document.querySelectorAll('.stile:not(.empty)').forEach((c) => c.addEventListener('click', () => {
