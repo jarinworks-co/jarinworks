@@ -3,10 +3,11 @@
   "items": [
     {
       "category": "AI Content",
-      "title": "[Video title]",
-      "brand": "[Brand]",
+      "title": "",
+      "brand": "",
       "url": "https://www.facebook.com/reel/1054330560700525/?s=fb_shorts_profile&stack_idx=0 ",
-      "thumbnail": ""
+      "thumbnail": "",
+      "ratio": "1:1 (square)"
     },
     {
       "category": "Talking Head",
