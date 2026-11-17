@@ -18,15 +18,15 @@ collections:
         file: content/profile.json
         fields:
           - { label: Name, name: name, widget: string }
-          - { label: "Header logo (optional — replaces name; transparent PNG/SVG, shown 40px tall)", name: logo, widget: image, required: false }
-          - { label: "Footer logo (optional — light version for the dark footer)", name: logo_light, widget: image, required: false }
-          - { label: "Favicon (browser tab icon — square PNG, 512×512)", name: favicon, widget: image, required: false }
+          - { label: "Header logo — 400×100px, transparent PNG or SVG (shown 40px tall; optional, replaces name)", name: logo, widget: image, required: false }
+          - { label: "Footer logo — 400×100px, transparent PNG or SVG, light colours for the dark footer (optional)", name: logo_light, widget: image, required: false }
+          - { label: "Favicon — 512×512px square PNG (browser tab icon)", name: favicon, widget: image, required: false }
           - { label: Label above headline, name: label, widget: string }
           - { label: Headline, name: headline, widget: string }
           - { label: Summary, name: summary, widget: text }
-          - { label: "Headshot — best as a cut-out PNG with transparent background, at least 1000px tall", name: headshot, widget: image, required: false }
+          - { label: "Headshot — 1200×1500px (4:5), cut-out PNG with transparent background, under 1 MB", name: headshot, widget: image, required: false }
           - { label: "Headshot is a cut-out (transparent background)", name: headshot_cutout, widget: boolean, default: true, required: false }
-          - { label: CV (PDF), name: cv_file, widget: file, required: false }
+          - { label: "CV — PDF, under 2 MB", name: cv_file, widget: file, required: false }
           - { label: Award badge in hero (leave empty to hide), name: award_badge, widget: string, required: false }
           - { label: Email, name: email, widget: string, required: false }
           - { label: "Phone (shown on hero button, contact & footer — e.g. +880 1772-950568)", name: phone, widget: string, required: false }
@@ -49,14 +49,14 @@ collections:
             name: items
             widget: list
             fields:
-              - { label: "Logo — transparent PNG/SVG, wide (about 300×80px). Shown 40px tall", name: logo, widget: image }
+              - { label: "Logo — 300×80px, transparent PNG or SVG, tightly cropped (shown 40px tall)", name: logo, widget: image }
               - { label: Company name (not shown — for screen readers & Google), name: name, widget: string, required: false }
 
-      - label: "3. Metric tiles"
+      - label: "3. Metric tiles (auto-sliding)"
         name: metrics
         file: content/metrics.json
         fields:
-          - label: Tiles
+          - label: "Tiles — add as many as you like; they scroll automatically"
             name: items
             widget: list
             fields:
@@ -73,7 +73,7 @@ collections:
           - { label: Category line, name: category, widget: string }
           - { label: Campaign title (Bangla), name: title_bn, widget: string }
           - { label: English line, name: title_en, widget: string, required: false }
-          - { label: Photo, name: photo, widget: image, required: false }
+          - { label: "Award photo — 1200×1000px JPG, under 400 KB", name: photo, widget: image, required: false }
 
       - label: "5. Videos"
         name: videos
@@ -90,7 +90,7 @@ collections:
               - { label: Title, name: title, widget: string }
               - { label: Brand / client, name: brand, widget: string, required: false }
               - { label: Video URL (YouTube, Facebook, Drive, Vimeo), name: url, widget: string, required: false }
-              - { label: Custom thumbnail (optional — YouTube auto-fills), name: thumbnail, widget: image, required: false }
+              - { label: "Custom thumbnail — 1280×720px (16:9) JPG, under 300 KB (optional — YouTube auto-fills)", name: thumbnail, widget: image, required: false }
 
       - label: "6. How I work"
         name: process
@@ -128,13 +128,13 @@ collections:
                 summary: "{{fields.url}}"
                 fields:
                   - { label: Video URL (YouTube, Facebook, Drive, Vimeo), name: url, widget: string }
-                  - { label: Thumbnail (optional — YouTube auto-fills), name: thumbnail, widget: image, required: false }
+                  - { label: "Thumbnail — 1280×720px (16:9) JPG, under 300 KB (optional — YouTube auto-fills)", name: thumbnail, widget: image, required: false }
               - label: Photos (first = cover)
                 name: photos
                 widget: list
                 required: false
                 fields:
-                  - { label: Photo, name: image, widget: image }
+                  - { label: "Photo — 1200×900px (4:3) JPG, under 400 KB", name: image, widget: image }
 
       - label: "8. Journey"
         name: journey
@@ -174,7 +174,7 @@ collections:
               - { label: Type (Blog, Web copy…), name: type, widget: string, required: false }
               - { label: Language, name: language, widget: select, options: ["English", "Bangla"] }
               - { label: Link, name: url, widget: string, required: false }
-              - { label: Thumbnail, name: thumbnail, widget: image, required: false }
+              - { label: "Thumbnail — 1200×675px (16:9) JPG, under 300 KB", name: thumbnail, widget: image, required: false }
 
       - label: "10. Capabilities & toolkit"
         name: capabilities
@@ -198,7 +198,7 @@ collections:
             fields:
               - { label: Tool name, name: name, widget: string }
               - { label: "Category (leave empty = auto for common tools)", name: category, widget: select, required: false, options: ["SEO", "Design", "Marketing", "Analytics", "Content & CMS", "AI", "Video", "Other"] }
-              - { label: Logo (small square icon, optional), name: logo, widget: image, required: false }
+              - { label: "Logo — 128×128px square, transparent PNG or SVG (optional)", name: logo, widget: image, required: false }
 
       - label: "11. Certifications"
         name: certifications
@@ -214,7 +214,7 @@ collections:
               - { label: Title, name: title, widget: string }
               - { label: Issuer, name: issuer, widget: string }
               - { label: Credential link, name: url, widget: string, required: false }
-              - { label: Issuer logo (optional), name: logo, widget: image, required: false }
+              - { label: "Issuer logo — 256×256px square, transparent PNG or SVG (optional)", name: logo, widget: image, required: false }
 
       - label: "12. Footer"
         name: footer

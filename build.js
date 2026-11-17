@@ -97,10 +97,14 @@ const heroTpl = () => `
 </section>
 ${logoStrip}`;
 
-const metricsS = list(metrics.items).length ? `
-<section class="metrics bleed" aria-label="Impact"><div class="tiles">
-${list(metrics.items).map((m) => `<div class="tile"><b>${esc(m.value)}</b><span>${esc(m.label)}</span></div>`).join('')}
-</div></section>` : '';
+const mItems = list(metrics.items).filter((m) => has(m.value) || has(m.label));
+const mTile = (m) => `<div class="tile"><b>${esc(m.value)}</b><span>${esc(m.label)}</span></div>`;
+const mSet = (() => { if (!mItems.length) return ''; let a = []; while (a.length < 8) a = a.concat(mItems); return a.map(mTile).join(''); })();
+const metricsS = mItems.length ? `
+<section class="metrics bleed" aria-label="Impact">
+  <ul class="sr-only">${mItems.map((m) => `<li>${esc(m.value)} ${esc(m.label)}</li>`).join('')}</ul>
+  <div class="mwrap" aria-hidden="true"><div class="mtrack2">${mSet}${mSet}</div></div>
+</section>` : '';
 
 const awardS = awardOn ? `
 <section id="award" aria-label="Award" style="padding:4.5rem 0"><div class="award-card">

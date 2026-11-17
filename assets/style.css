@@ -87,8 +87,7 @@ section{padding:5rem 0}
 
 /* metrics */
 .metrics{--bg:var(--brand);color:#fff;padding:4.5rem 0}
-.tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1rem}
-.tile{background:rgba(255,255,255,.12);border-radius:18px;padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.4rem}
+.tile{flex:0 0 262px;box-sizing:border-box;background:rgba(255,255,255,.12);border-radius:18px;padding:1.75rem 1.5rem;display:flex;flex-direction:column;gap:.4rem}
 .tile b{font-size:2.6rem;font-weight:600;letter-spacing:-.03em}
 .tile span{color:var(--on-dark)}
 
@@ -295,3 +294,12 @@ section{padding:5rem 0}
 @keyframes bob{50%{transform:translateY(-10px)}}
 @media(prefers-reduced-motion:reduce){.f1,.f2,.spark{animation:none}}
 @media(max-width:640px){.portrait{width:min(92%,360px)}.f1{left:-4%;top:auto;bottom:34%}.f2{right:-4%;bottom:6%}.float{padding:.5rem .75rem;gap:.45rem;font-size:.75rem}.float b{font-size:1.15rem}}
+
+/* metrics slider */
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.mwrap{overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
+.mtrack2{display:flex;gap:1rem;width:max-content;animation:metricscroll 36s linear infinite}
+.mwrap:hover .mtrack2{animation-play-state:paused}
+@keyframes metricscroll{to{transform:translateX(calc(-50% - .5rem))}}
+@media(prefers-reduced-motion:reduce){.mtrack2{animation:none;flex-wrap:wrap;width:auto}}
+@media(max-width:640px){.tile{flex-basis:200px;padding:1.4rem 1.2rem}.tile b{font-size:2.1rem}}
