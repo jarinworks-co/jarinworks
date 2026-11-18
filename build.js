@@ -70,7 +70,9 @@ const telHref = phone ? 'tel:' + phone.replace(/[^+\d]/g, '') : '';
 const PHONE_ICON = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 01-2.2 2 19.8 19.8 0 01-8.6-3.1 19.5 19.5 0 01-6-6A19.8 19.8 0 012.1 4.2 2 2 0 014.1 2h3a2 2 0 012 1.7c.1 1 .4 1.9.7 2.8a2 2 0 01-.5 2.1L8 9.9a16 16 0 006 6l1.3-1.3a2 2 0 012.1-.4c.9.3 1.8.6 2.8.7a2 2 0 011.7 2z"/></svg>';
 const SI_MAIL = '<svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>';
 const BT = { work: has(p.btn_work) ? p.btn_work : 'View my work', contact: has(p.btn_contact) ? p.btn_contact : 'Contact', email: has(p.btn_email) ? p.btn_email : 'Email', cv: has(p.btn_cv) ? p.btn_cv : 'Download CV (PDF)', headcv: has(p.btn_header_cv) ? p.btn_header_cv : 'Download CV', find: has(p.find_label) ? p.find_label : 'Find me on' };
-const cvHref = has(p.cv_file) ? esc(p.cv_file) : '#contact';
+const cvHref = has(p.cv_file) ? esc(p.cv_file.trim()) : '#contact';
+const cvExt = has(p.cv_file) && /^https?:/i.test(p.cv_file.trim());
+const cvAttr = !has(p.cv_file) ? '' : cvExt ? 'target="_blank" rel="noopener"' : 'download';
 const awardOn = award.show !== false;
 
 const logoItems = list(companies.items).filter((c) => has(c.logo));
@@ -79,11 +81,11 @@ const logoStrip = logoItems.length ? `<div class="companies" aria-label="Compani
 const heroTpl = () => `
 <header class="top">
   <a class="logo" href="#top">${has(p.logo) ? `<img src="${esc(p.logo)}" alt="${esc(p.name)}">` : esc(p.name)}</a>
-  <a class="head-cv" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>CV</a>
+  <a class="head-cv" href="${cvHref}" ${cvAttr}>CV</a>
   <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span></button>
   <nav class="nav" id="mainnav" aria-label="Main">
     ${headNav}
-    <a class="cv" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>${esc(BT.headcv)}</a>
+    <a class="cv" href="${cvHref}" ${cvAttr}>${esc(BT.headcv)}</a>
   </nav>
 </header>
 <section id="top" class="hero">
@@ -178,7 +180,6 @@ const speakS = sItems.length ? `
   }).join('\n')}
   </div>
   <div class="more-wrap"><button class="more" type="button" hidden>View all</button></div>
-  <p class="note">Tap a photo or video to view it full screen.</p>
 </section>` : '';
 
 const journeyS = list(journey.items).length ? `
@@ -228,7 +229,7 @@ const certsS = list(certs.items).length ? `
 const contactS = `
 <section id="contact" class="contact">
   <h2>${esc(p.contact_heading)}</h2>
-  <div class="btns"><a class="btn btn-w" href="${cvHref}" ${has(p.cv_file) ? 'download' : ''}>${esc(BT.cv)}</a>${has(p.email) ? `<a class="btn btn-o btn-ico mrev" href="mailto:${esc(p.email.trim())}" data-num="${esc(p.email.trim())}" aria-label="Show ${esc(p.name)}'s email">${SI_MAIL}<span>${esc(BT.email)}</span></a>` : ''}${phone ? `<a class="btn btn-o btn-ico call" href="${telHref}" data-num="${esc(phonePretty)}" aria-label="Show ${esc(p.name)}'s phone number">${PHONE_ICON}<span>Contact</span></a>` : ''}</div>
+  <div class="btns"><a class="btn btn-w" href="${cvHref}" ${cvAttr}>${esc(BT.cv)}</a>${has(p.email) ? `<a class="btn btn-o btn-ico mrev" href="mailto:${esc(p.email.trim())}" data-num="${esc(p.email.trim())}" aria-label="Show ${esc(p.name)}'s email">${SI_MAIL}<span>${esc(BT.email)}</span></a>` : ''}${phone ? `<a class="btn btn-o btn-ico call" href="${telHref}" data-num="${esc(phonePretty)}" aria-label="Show ${esc(p.name)}'s phone number">${PHONE_ICON}<span>Contact</span></a>` : ''}</div>
 </section>
 `;
 const fcol = (title, links) => { const l = links.filter((n) => n[2]); return l.length ? `<nav class="fcol" aria-label="${esc(title)}"><h3>${esc(title)}</h3>${l.map((n) => `<a href="${n[0]}">${esc(n[1])}</a>`).join('')}</nav>` : ''; };

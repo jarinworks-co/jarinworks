@@ -28,7 +28,7 @@ collections:
           - { label: Summary, name: summary, widget: text }
           - { label: "Headshot — 1200×1500px (4:5), cut-out PNG with transparent background, under 1 MB", name: headshot, widget: image, required: false }
           - { label: "Headshot is a cut-out (transparent background)", name: headshot_cutout, widget: boolean, default: true, required: false }
-          - { label: "CV — PDF, under 2 MB", name: cv_file, widget: file, required: false }
+          - { label: "CV — upload a PDF (under 2 MB) OR use Insert from URL to paste a link (Google Drive etc.) — links open in a new tab", name: cv_file, widget: file, required: false }
           - { label: Award badge in hero (leave empty to hide), name: award_badge, widget: string, required: false }
           - { label: Email, name: email, widget: string, required: false }
           - { label: "Phone (shown on hero button, contact & footer — e.g. +880 1772-950568)", name: phone, widget: string, required: false }
