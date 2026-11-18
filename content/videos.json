@@ -113,13 +113,6 @@
       "thumbnail": "/images/uploads/v6.png"
     },
     {
-      "category": "Talking Head",
-      "title": "[Video title]",
-      "brand": "[Brand]",
-      "url": "",
-      "thumbnail": ""
-    },
-    {
       "category": "Directional",
       "title": "",
       "brand": "",
@@ -228,6 +221,95 @@
       "category": "Directional",
       "url": "https://www.facebook.com/reel/4539798186241200/?s=fb_shorts_profile&stack_idx=0 ",
       "thumbnail": "/images/uploads/d18.png"
+    },
+    {
+      "category": "Directional",
+      "title": "",
+      "brand": "",
+      "url": "https://www.youtube.com/watch?v=Tw1_Pj95Zd4",
+      "thumbnail": ""
+    },
+    {
+      "ratio": "16:9 (landscape)",
+      "category": "Directional",
+      "url": "https://www.youtube.com/watch?v=PO1QupMZQYU"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/1003494549114119",
+      "thumbnail": "/images/uploads/t1.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/2376415882845796",
+      "thumbnail": "/images/uploads/t2.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/4418850731718706",
+      "thumbnail": "/images/uploads/t3.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/1312071660575021",
+      "thumbnail": "/images/uploads/t4.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/936248235924292",
+      "thumbnail": "/images/uploads/t5.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/927879952919834",
+      "thumbnail": "/images/uploads/t7.png"
+    },
+    {
+      "ratio": "16:9 (landscape)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/1198368695780923",
+      "thumbnail": "/images/uploads/t8.png"
+    },
+    {
+      "ratio": "16:9 (landscape)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/1816443042423442",
+      "thumbnail": "/images/uploads/t9.png"
+    },
+    {
+      "ratio": "16:9 (landscape)",
+      "category": "Talking Head",
+      "url": "https://www.youtube.com/watch?v=4odCliJq6MI"
+    },
+    {
+      "ratio": "16:9 (landscape)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/CreativeITInstitute/videos/313866251668488/?vh=e&fs=e&mibextid=wwXIfr&rdid=P3Imyxwtzda0DdFC#",
+      "thumbnail": "/images/uploads/t11.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/575926517837044",
+      "thumbnail": "/images/uploads/t12.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/6430744863638754",
+      "thumbnail": "/images/uploads/t13.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Talking Head",
+      "url": "https://www.facebook.com/reel/647784487292741",
+      "thumbnail": "/images/uploads/t14.png"
     }
   ]
 }
