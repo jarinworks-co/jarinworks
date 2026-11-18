@@ -81,7 +81,7 @@ const logoStrip = logoItems.length ? `<div class="companies" aria-label="Compani
 const heroTpl = () => `
 <header class="top">
   <a class="logo" href="#top">${has(p.logo) ? `<img src="${esc(p.logo)}" alt="${esc(p.name)}">` : esc(p.name)}</a>
-  <a class="head-cv" href="${cvHref}" ${cvAttr}>CV</a>
+  <a class="head-cv" href="${cvHref}" ${cvAttr}>${esc(has(p.btn_mobile_cv) ? p.btn_mobile_cv : 'Resume')}</a>
   <button class="menu-btn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mainnav"><span></span></button>
   <nav class="nav" id="mainnav" aria-label="Main">
     ${headNav}
