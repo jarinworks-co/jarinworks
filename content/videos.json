@@ -46,13 +46,6 @@
       "thumbnail": "/images/uploads/7.png"
     },
     {
-      "category": "Directional",
-      "title": "[Video title]",
-      "brand": "[Brand]",
-      "url": "",
-      "thumbnail": ""
-    },
-    {
       "category": "Online Content",
       "title": "",
       "brand": "",
@@ -125,6 +118,116 @@
       "brand": "[Brand]",
       "url": "",
       "thumbnail": ""
+    },
+    {
+      "category": "Directional",
+      "title": "",
+      "brand": "",
+      "url": "https://www.facebook.com/reel/881844498227170/?s=fb_shorts_profile&stack_idx=0",
+      "thumbnail": "/images/uploads/d1.png",
+      "ratio": "9:16 (vertical / Reels)"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1790638608625544/?s=fb_shorts_profile&stack_idx=0",
+      "thumbnail": "/images/uploads/d2.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1613096994160856/?s=fb_shorts_profile&stack_idx=0",
+      "thumbnail": "/images/uploads/d3.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/2752186531813181/?s=fb_shorts_profile&stack_idx=0",
+      "thumbnail": "/images/uploads/d4.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/970893238861077/?s=fb_shorts_profile&stack_idx=0",
+      "thumbnail": "/images/uploads/d5.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/916666464540740/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d6.png"
+    },
+    {
+      "ratio": "16:9 (landscape)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/915075371316565/?s=fb_shorts_profile&stack_idx=0",
+      "thumbnail": "/images/uploads/d7.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1451936270202496/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d8.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1625930688991783/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d9.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1804526417419514/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d10.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1115638071222505/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d11.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1627501452211982/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d12.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/2141778089747869/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d13.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1683365819885282/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d14.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/1146363264720577/?s=fb_shorts_profile&stack_idx=0",
+      "thumbnail": "/images/uploads/d15.png"
+    },
+    {
+      "ratio": "9:16 (vertical / Reels)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/2133173850807769/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d16.png"
+    },
+    {
+      "ratio": "1:1 (square)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/4367885840195106/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d17.png"
+    },
+    {
+      "ratio": "16:9 (landscape)",
+      "category": "Directional",
+      "url": "https://www.facebook.com/reel/4539798186241200/?s=fb_shorts_profile&stack_idx=0 ",
+      "thumbnail": "/images/uploads/d18.png"
     }
   ]
 }
