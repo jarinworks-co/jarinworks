@@ -241,6 +241,11 @@
       "thumbnail": "/images/uploads/t1.png"
     },
     {
+      "ratio": "16:9 (landscape)",
+      "category": "Talking Head",
+      "url": "https://www.youtube.com/watch?v=s6kC2Q7pvbo"
+    },
+    {
       "ratio": "1:1 (square)",
       "category": "Talking Head",
       "url": "https://www.facebook.com/reel/2376415882845796",
@@ -257,6 +262,11 @@
       "category": "Talking Head",
       "url": "https://www.facebook.com/reel/1312071660575021",
       "thumbnail": "/images/uploads/t4.png"
+    },
+    {
+      "ratio": "16:9 (landscape)",
+      "category": "Talking Head",
+      "url": "https://www.youtube.com/watch?v=czNMtmbEXE8"
     },
     {
       "ratio": "1:1 (square)",
