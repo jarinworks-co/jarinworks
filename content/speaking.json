@@ -3,40 +3,127 @@
   "intro": "Workshops and sessions on content, branding and digital marketing for universities, media and professionals.",
   "items": [
     {
-      "venue": "University of Dhaka",
-      "topic": "[Topic · Year]",
-      "mode": "Offline",
-      "video_url": "",
-      "photos": []
-    },
-    {
       "venue": "The Daily Star",
       "topic": "[Topic · Year]",
       "mode": "Offline",
       "video_url": "",
-      "photos": []
+      "photos": [
+        {
+          "image": "/images/uploads/ds1.png"
+        },
+        {
+          "image": "/images/uploads/ds2.png"
+        },
+        {
+          "image": "/images/uploads/ds3.png"
+        }
+      ]
+    },
+    {
+      "venue": "University of Dhaka",
+      "topic": "[Topic · Year]",
+      "mode": "Offline",
+      "video_url": "",
+      "photos": [
+        {
+          "image": "/images/uploads/du1.png"
+        },
+        {
+          "image": "/images/uploads/du2.png"
+        },
+        {
+          "image": "/images/uploads/du3.png"
+        },
+        {
+          "image": "/images/uploads/du4.png"
+        }
+      ]
     },
     {
       "venue": "Southeast University",
       "topic": "[Topic · Year]",
       "mode": "Offline",
       "video_url": "",
-      "photos": []
+      "photos": [
+        {
+          "image": "/images/uploads/se1.png"
+        },
+        {
+          "image": "/images/uploads/se2.png"
+        },
+        {
+          "image": "/images/uploads/se3.png"
+        },
+        {
+          "image": "/images/uploads/se4.png"
+        },
+        {
+          "image": "/images/uploads/se5.png"
+        }
+      ]
     },
     {
       "venue": "Bangladesh Home Economics College",
       "mode": "Offline",
-      "topic": "2024"
+      "topic": "2024",
+      "photos": [
+        {
+          "image": "/images/uploads/home1.png"
+        },
+        {
+          "image": "/images/uploads/home2.png"
+        },
+        {
+          "image": "/images/uploads/home3.png"
+        }
+      ]
     },
     {
       "venue": "Lalmatia Govt. Mohila College",
       "mode": "Offline",
-      "topic": "2023"
+      "topic": "2023",
+      "photos": [
+        {
+          "image": "/images/uploads/la1.png"
+        },
+        {
+          "image": "/images/uploads/la2.png"
+        },
+        {
+          "image": "/images/uploads/la3.png"
+        },
+        {
+          "image": "/images/uploads/la4.png"
+        }
+      ]
     },
     {
       "venue": "International Standard University",
       "topic": "2024",
-      "mode": "Offline"
+      "mode": "Offline",
+      "photos": [
+        {
+          "image": "/images/uploads/s7.png"
+        },
+        {
+          "image": "/images/uploads/s6.png"
+        },
+        {
+          "image": "/images/uploads/s5.png"
+        },
+        {
+          "image": "/images/uploads/s4.png"
+        },
+        {
+          "image": "/images/uploads/s3.png"
+        },
+        {
+          "image": "/images/uploads/s2.png"
+        },
+        {
+          "image": "/images/uploads/s1.png"
+        }
+      ]
     }
   ]
 }
