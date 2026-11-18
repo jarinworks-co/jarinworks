@@ -15,7 +15,7 @@
       "type": "",
       "language": "English",
       "url": "https://www.creativeitinstitute.com/",
-      "thumbnail": ""
+      "thumbnail": "/images/uploads/creativeit.png"
     },
     {
       "title": "Track Force",
@@ -23,72 +23,85 @@
       "type": "Article",
       "language": "English",
       "url": "https://trackforce.io/",
-      "thumbnail": ""
+      "thumbnail": "/images/uploads/trackforce.png"
     },
     {
       "url": "https://travilo.io/",
       "title": "Travilo",
-      "language": "English"
+      "language": "English",
+      "thumbnail": "/images/uploads/travelo.png"
     },
     {
       "language": "Bangla",
       "url": "https://illusionarc.com/",
-      "title": "Illusion Arc"
+      "title": "Illusion Arc",
+      "thumbnail": "/images/uploads/illusionarc.png"
     },
     {
       "title": "Farias Agro",
       "url": "https://fariasagro.com/",
-      "language": "Bangla"
+      "language": "Bangla",
+      "thumbnail": "/images/uploads/farias-agro.png"
     },
     {
       "title": "999 National Help Desk",
       "url": "https://www.999.gov.bd/home",
-      "language": "Bangla"
+      "language": "Bangla",
+      "thumbnail": "/images/uploads/999.png"
     },
     {
       "url": "https://www.creativeclippingpath.com/",
       "title": "Creative Clipping Path",
-      "language": "English"
+      "language": "English",
+      "thumbnail": "/images/uploads/ccpl.png"
     },
     {
       "title": "We Devs",
       "language": "English",
-      "url": "https://wedevs.com/"
+      "url": "https://wedevs.com/",
+      "thumbnail": "/images/uploads/wedevss.png"
     },
     {
       "url": "https://netcoden.com/",
       "title": "NetCoden",
-      "language": "English"
+      "language": "English",
+      "thumbnail": "/images/uploads/netcodenn.png"
     },
     {
       "url": "https://aeroapps.io/",
       "title": "Aero Apps",
-      "language": "English"
+      "language": "English",
+      "thumbnail": "/images/uploads/aeroapps.png"
     },
     {
       "url": "https://aerodrop.ai/",
       "title": "Aero Drop",
-      "language": "English"
+      "language": "English",
+      "thumbnail": "/images/uploads/aerodrop.png"
     },
     {
       "title": "Studio iBOS",
       "url": "https://studio.ibos.io/",
-      "language": "English"
+      "language": "English",
+      "thumbnail": "/images/uploads/ibosstudio.png"
     },
     {
       "language": "English",
       "url": "https://seasky.com.bd/",
-      "title": "Sea Sky"
+      "title": "Sea Sky",
+      "thumbnail": "/images/uploads/seasky.png"
     },
     {
       "url": "https://brainforward.com.bd/",
       "language": "Bangla",
-      "title": "Brain Forward"
+      "title": "Brain Forward",
+      "thumbnail": "/images/uploads/brainforward.png"
     },
     {
       "url": "https://subscriptionpro.co/",
       "title": "Subscription Pro",
-      "language": "English"
+      "language": "English",
+      "thumbnail": "/images/uploads/subsription-pro.png"
     }
   ]
 }
